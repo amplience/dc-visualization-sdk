@@ -1,0 +1,7 @@
+node_modules
+.env
+.cache
+dist
+coverage
+.DS_Store
+docs
