@@ -6,6 +6,7 @@
   "module": "dist/lib/dc-visualization-core.es5.js",
   "typings": "dist/types/dc-visualization-core.d.ts",
   "scripts": {
+    "prepare": "npm run build",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "lint:fix": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts' --fix",
     "prebuild": "rimraf dist",
