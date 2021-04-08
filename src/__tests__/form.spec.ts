@@ -42,7 +42,7 @@ describe('Form', () => {
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(1)
 
@@ -53,10 +53,9 @@ describe('Form', () => {
         config: {
           format: 'inlined',
           depth: 'all',
-          locale: null,
           isCDv1: false,
         },
-        id: '4adb99dcf8686729267d7286915f090369418aa6',
+        id: 'f0c61d3970237e725866704d6fa5487d7fce557d',
       })
 
       expect(emit).toHaveBeenCalledTimes(1)
@@ -68,17 +67,16 @@ describe('Form', () => {
         config: {
           scope: 'tree',
           fullBodyObject: true,
-          locale: null,
           isCDv1: true,
         },
-        id: 'c1705779fde93218bd89d765ed6e25494520c553',
+        id: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274',
       })
 
       expect(emit).toHaveBeenCalledTimes(2)
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(2)
 
@@ -86,7 +84,7 @@ describe('Form', () => {
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(1)
 
@@ -94,13 +92,13 @@ describe('Form', () => {
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(0)
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          'c1705779fde93218bd89d765ed6e25494520c553'
+          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
         )?.size
       ).toBe(1)
 
@@ -108,7 +106,7 @@ describe('Form', () => {
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          'c1705779fde93218bd89d765ed6e25494520c553'
+          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
         )?.size
       ).toBe(0)
     })
@@ -135,13 +133,13 @@ describe('Form', () => {
       const dispose2 = form.saved(handler2)
       const dispose3 = form.saved(handler3, { isCDv1: true })
 
-      run({ handlerId: '4adb99dcf8686729267d7286915f090369418aa6', model: {} })
+      run({ handlerId: 'f0c61d3970237e725866704d6fa5487d7fce557d', model: {} })
 
       expect(handler1).toBeCalledTimes(1)
       expect(handler2).toBeCalledTimes(1)
       expect(handler3).not.toBeCalled()
 
-      run({ handlerId: 'c1705779fde93218bd89d765ed6e25494520c553', model: {} })
+      run({ handlerId: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274', model: {} })
 
       expect(handler1).toBeCalledTimes(1)
       expect(handler2).toBeCalledTimes(1)
@@ -169,7 +167,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(1)
 
@@ -182,10 +180,9 @@ describe('Form', () => {
           config: {
             format: 'inlined',
             depth: 'all',
-            locale: null,
             isCDv1: false,
           },
-          id: '4adb99dcf8686729267d7286915f090369418aa6',
+          id: 'f0c61d3970237e725866704d6fa5487d7fce557d',
         }
       )
 
@@ -200,10 +197,9 @@ describe('Form', () => {
           config: {
             scope: 'tree',
             fullBodyObject: true,
-            locale: null,
             isCDv1: true,
           },
-          id: 'c1705779fde93218bd89d765ed6e25494520c553',
+          id: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274',
         }
       )
 
@@ -211,7 +207,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(2)
 
@@ -219,7 +215,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(1)
 
@@ -227,13 +223,13 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          '4adb99dcf8686729267d7286915f090369418aa6'
+          'f0c61d3970237e725866704d6fa5487d7fce557d'
         )?.size
       ).toBe(0)
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          'c1705779fde93218bd89d765ed6e25494520c553'
+          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
         )?.size
       ).toBe(1)
 
@@ -241,7 +237,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          'c1705779fde93218bd89d765ed6e25494520c553'
+          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
         )?.size
       ).toBe(0)
     })
@@ -270,13 +266,13 @@ describe('Form', () => {
       const dispose2 = form.changed(handler2)
       const dispose3 = form.changed(handler3, { isCDv1: true })
 
-      run({ handlerId: '4adb99dcf8686729267d7286915f090369418aa6', model: {} })
+      run({ handlerId: 'f0c61d3970237e725866704d6fa5487d7fce557d', model: {} })
 
       expect(handler1).toBeCalledTimes(1)
       expect(handler2).toBeCalledTimes(1)
       expect(handler3).not.toBeCalled()
 
-      run({ handlerId: 'c1705779fde93218bd89d765ed6e25494520c553', model: {} })
+      run({ handlerId: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274', model: {} })
 
       expect(handler1).toBeCalledTimes(1)
       expect(handler2).toBeCalledTimes(1)

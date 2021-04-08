@@ -8,11 +8,14 @@ export enum LOCALE_EVENTS {
   CHANGE = 'visualisation-sdk:locale:change',
 }
 
-export type LocaleModel = string
+export type LocaleModel = string | null
 
 export type LocaleChangeHandler = (locale: LocaleModel) => void
 export type LocaleChangeDispose = () => void
 
+/**
+ * Locale class allows you to get the currently selected locale in the form and watch for changes to asynchronously update your application
+ */
 export class Locale {
   public changeHandlerContainer: HandlerContainer<LocaleChangeHandler>
 
@@ -26,10 +29,36 @@ export class Locale {
     })
   }
 
+  /**
+   * Get the current locale selected in visualization settings
+   *
+   * ### Example
+   *
+   * ```typescript
+   * const value = await visualization.locale.get();
+   *
+   * console.log(value)
+   * ```
+   */
   get(): Promise<LocaleModel> {
     return this.connection.request(LOCALE_EVENTS.GET)
   }
 
+  /**
+   * Sets up a listener for when the visualization locale changes.
+   *
+   * @param cb - callback function to be called when the visualization locale changes.
+   *
+   * @returns a dispose function which removes the listener
+   *
+   * ### Example
+   *
+   * ```typescript
+   *  const dispose = visualization.locale.changed((model) => {
+   *    // handle locale change
+   *  })
+   * ```
+   */
   changed(cb: LocaleChangeHandler): LocaleChangeDispose {
     return this.changeHandlerContainer.add(cb)
   }

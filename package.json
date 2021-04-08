@@ -9,7 +9,7 @@
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "lint:fix": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts' --fix",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs src/dc-visualization-core.ts --media media/  --excludeInternal",
     "build:watch": "tsc --module commonjs && rollup -c rollup.config.ts -w",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest --coverage",

@@ -1,22 +1,45 @@
-import visualisation from '../dc-visualization-core'
+import visualisation, {
+  ERRORS_INIT,
+  visualisation as conneciton,
+  Form,
+  Locale,
+  Settings,
+  DeliveryKey,
+  FORM_EVENTS,
+  LOCALE_EVENTS,
+  SETTINGS_EVENTS,
+  DELIVERY_KEY_EVENTS,
+} from '../dc-visualization-core'
 
-import { Form } from '../form'
-import { Locale } from '../locale'
-import { Settings } from '../settings'
-import { DeliveryKey } from '../delivery-key'
 import { Visualization } from '../connection'
 import { ClientConnection, MC_EVENTS } from 'message-event-channel'
 
 describe('core smoke test', () => {
   describe('init', () => {
-    it('should be instance of Promise', () => {
+    it('should be instance of Promise', async () => {
+      spyOn(conneciton, 'init').and.returnValue(Promise.resolve())
+
       const connected = visualisation.init()
 
       expect(connected).toBeInstanceOf(Promise)
+
+      const sdk = await connected
+
+      expect(sdk.form).toBeInstanceOf(Form)
+      expect(sdk.settings).toBeInstanceOf(Settings)
+      expect(sdk.deliveryKey).toBeInstanceOf(DeliveryKey)
+      expect(sdk.locale).toBeInstanceOf(Locale)
     })
 
     it('should be instance of Vis', () => {
       expect(Visualization.create()).toBeInstanceOf(Visualization)
+    })
+
+    it('event keys should be present', () => {
+      expect(FORM_EVENTS).toBeTruthy()
+      expect(LOCALE_EVENTS).toBeTruthy()
+      expect(SETTINGS_EVENTS).toBeTruthy()
+      expect(DELIVERY_KEY_EVENTS).toBeTruthy()
     })
 
     it('should return true if connected', async () => {
@@ -35,7 +58,7 @@ describe('core smoke test', () => {
 
       const connected = await vis.init()
 
-      expect(connected).toBe(true)
+      expect(connected).toBe(undefined)
     })
 
     it('should return false if failed to connect', async () => {
@@ -52,9 +75,11 @@ describe('core smoke test', () => {
         init: () => {},
       } as never) as ClientConnection
 
-      const connected = await vis.init()
-
-      expect(connected).toBe(false)
+      try {
+        await vis.init()
+      } catch (err) {
+        expect(err).toBe(ERRORS_INIT.CONNECTION_TIMEOUT)
+      }
     })
   })
 

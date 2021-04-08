@@ -6,26 +6,22 @@ export type DeliveryRequestConfig = { isCDv1: boolean } & (
 export interface CD1Config {
   scope: 'tree' | 'root'
   fullBodyObject: boolean
-  locale: string | null
 }
 
 export interface CD2Config {
   format: 'inlined' | 'linked'
   depth: 'root' | 'all'
-  locale?: string | null
 }
 
 export class RequestConfigContainer {
   DEFAULT_PARAMS_CD1: CD1Config = {
     scope: 'tree',
     fullBodyObject: true,
-    locale: null,
   }
 
   DEFAULT_PARAMS_CD2: CD2Config = {
     format: 'inlined',
     depth: 'all',
-    locale: null,
   }
 
   constructor(public _config: Partial<DeliveryRequestConfig>) {}
