@@ -29,7 +29,7 @@ Using cdn:
 
 # Usage
 
-In order to create a connection to DC you need to initiate the SDK with `visualization.init()`. Once initiated you can subscribe to change events in the content form with `visualization.form.changed(<callback>)`.
+In order to create a connection to DC you first need to initiate the SDK with `visualization.init()`. Once initiated you can subscribe to change events in the content form with `visualization.form.changed(<callback>)`.
 
 Examples of this are shown below:
 
@@ -76,7 +76,7 @@ visualization.init().then((sdk) => {
   });
 }).catch((err){
   // unable to connect
-})
+});
 ```
 ## Form
 
@@ -118,16 +118,16 @@ This method will retrieve the current state of the form.
 > Note: this method is only available in the Production Content Form
 
 ```typescript
-import visualization from 'dc-visualization-sdk'
+import visualization from 'dc-visualization-sdk';
 
 const options = {
   format: 'linked'
   depth: 'all'
-}
+};
 
 visualization.form.get(options).then(model => {
     // handle form model
-})
+});
 ```
 
 ### form.changed()
@@ -143,7 +143,7 @@ import visualization from 'dc-visualization-sdk'
 
 const unsubscribe = visualization.form.changed((model) => {
   // handle form model
-})
+});
 ```
 ## Locale
 
@@ -154,9 +154,9 @@ The `Locale` class allows you to retrieve the currently selected locale in the v
 This method will retrieve the current locale selected in the visualization options. The method returns a promise that resolves either to the selected locale string e.g. `'en-GB'` or `null` if none are selected.
 
 ```typescript
-const value = await visualization.locale.get()
+const value = await visualization.locale.get();
 
-console.log(value)
+console.log(value);
 // 'en-GB'
 ```
 
@@ -167,7 +167,7 @@ This method is for subscribing to changes to the selected locale in the visualiz
 ```typescript
 const unsubscribe = visualization.locale.changed((model) => {
   // handle locale change
-})
+});
 ```
 
 ## Delivery Key
@@ -179,9 +179,9 @@ The `DeliveryKey` class allows you to retrieve the delivery key of the content i
 This method will retrieve the current Delivery Key of the content item being visualized. The method returns a promise that resolves to the set delivery key string i.e `carousel-home-page` or `null` if no key is set.
 
 ```typescript
-const value = await visualization.deliveryKey.get()
+const value = await visualization.deliveryKey.get();
 
-console.log(value)
+console.log(value);
 // 'carousel-home-page'
 ```
 
@@ -192,7 +192,7 @@ This method is for subscribing to changes to the Delivery Key of the content ite
 ```typescript
 const unsubscribe = visualization.deliveryKey.changed((model) => {
   // handle deliveryKey change
-})
+});
 ```
 
 ## Settings
@@ -204,9 +204,9 @@ The `Settings` class allows you to retrieve and watch for changes to the current
 This method will retrieve the current visualization settings for the content item being visualized. The method returns a promise that resolves to a settings object.
 
 ```typescript
-const value = await visualization.settings.get()
+const value = await visualization.settings.get();
 
-console.log(value)
+console.log(value);
 ```
 
 ### settings.changed()
@@ -216,7 +216,7 @@ This method is for subscribing to changes to the settings object. You provide a 
 ```typescript
 const unsubscribe = visualization.settings.changed((model) => {
   // handle settings change
-})
+});
 ```
 
 
