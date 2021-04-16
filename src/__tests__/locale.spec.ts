@@ -22,6 +22,7 @@ describe('Locale', () => {
 
   describe('changed', () => {
     it('should add handlers to call later', () => {
+      // tslint:disable-next-line: ban-types no-empty
       let run: Function = () => {}
       const on = jest.fn((key, _run) => {
         run = _run

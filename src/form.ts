@@ -7,6 +7,7 @@ import {
   ModelChangeDispose,
   ModelChangeHandler,
 } from './interfaces/form-handler'
+
 import { DeliveryRequestConfig, RequestConfigContainer } from './request-config'
 
 export const KEY = 'visualisation-sdk:dc-form'
@@ -82,7 +83,8 @@ export class Form {
    * ```
    */
   async get<Body = CDv2Response>(config: Partial<DeliveryRequestConfig> = {}) {
-    const model = await this.connection.request<Body>(FORM_EVENTS.GET, config)
+    const { config: _config } = new RequestConfigContainer(config)
+    const model = await this.connection.request<Body>(FORM_EVENTS.GET, _config)
 
     return model
   }

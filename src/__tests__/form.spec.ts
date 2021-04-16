@@ -13,10 +13,30 @@ describe('Form', () => {
       } as never) as ClientConnection
 
       const form = new Form(connection)
-      const result = await form.get({ depth: 'all' })
+      const result = await form.get({ depth: 'root' })
+
+      expect(connection.request).toBeCalledWith('visualisation-sdk:form:get', {
+        depth: 'root',
+        format: 'inlined',
+      })
+      expect(result).toEqual({ hello: 'world' })
+    })
+
+    it('should call connection with get key and no config passed', async () => {
+      const on = jest.fn()
+      const request = jest.fn(() => ({ hello: 'world' }))
+
+      const connection = ({
+        on,
+        request,
+      } as never) as ClientConnection
+
+      const form = new Form(connection)
+      const result = await form.get()
 
       expect(connection.request).toBeCalledWith('visualisation-sdk:form:get', {
         depth: 'all',
+        format: 'inlined',
       })
       expect(result).toEqual({ hello: 'world' })
     })
@@ -39,10 +59,21 @@ describe('Form', () => {
 
       // tslint:disable-next-line
       const dispose1 = form.saved((model) => {})
+      // tslint:disable-next-line
+      const dispose3 = form.saved((model) => {}, {
+        format: 'linked',
+        depth: 'root',
+      })
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
+        )?.size
+      ).toBe(1)
+
+      expect(
+        form.savedHandlerContainer.changeHandlers.get(
+          'fa34dcff1b03880fa5c6f454423e2f839ee0885a'
         )?.size
       ).toBe(1)
 
@@ -53,30 +84,15 @@ describe('Form', () => {
         config: {
           format: 'inlined',
           depth: 'all',
-          isCDv1: false,
         },
-        id: 'f0c61d3970237e725866704d6fa5487d7fce557d',
-      })
-
-      expect(emit).toHaveBeenCalledTimes(1)
-
-      // tslint:disable-next-line
-      const dispose3 = form.saved((model) => {}, { isCDv1: true })
-
-      expect(emit).toHaveBeenCalledWith('visualisation-sdk:form:saved-config', {
-        config: {
-          scope: 'tree',
-          fullBodyObject: true,
-          isCDv1: true,
-        },
-        id: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274',
+        id: '1b0ea33d365f8719b11762ad0ab45f80357ce200',
       })
 
       expect(emit).toHaveBeenCalledTimes(2)
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(2)
 
@@ -84,7 +100,7 @@ describe('Form', () => {
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(1)
 
@@ -92,21 +108,7 @@ describe('Form', () => {
 
       expect(
         form.savedHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
-        )?.size
-      ).toBe(0)
-
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
-        )?.size
-      ).toBe(1)
-
-      dispose3()
-
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(0)
     })
@@ -125,25 +127,16 @@ describe('Form', () => {
       } as never) as ClientConnection
       const handler1 = jest.fn()
       const handler2 = jest.fn()
-      const handler3 = jest.fn()
 
       const form = new Form(connection)
 
       const dispose1 = form.saved(handler1)
       const dispose2 = form.saved(handler2)
-      const dispose3 = form.saved(handler3, { isCDv1: true })
 
-      run({ handlerId: 'f0c61d3970237e725866704d6fa5487d7fce557d', model: {} })
-
-      expect(handler1).toBeCalledTimes(1)
-      expect(handler2).toBeCalledTimes(1)
-      expect(handler3).not.toBeCalled()
-
-      run({ handlerId: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274', model: {} })
+      run({ handlerId: '1b0ea33d365f8719b11762ad0ab45f80357ce200', model: {} })
 
       expect(handler1).toBeCalledTimes(1)
       expect(handler2).toBeCalledTimes(1)
-      expect(handler3).toBeCalledTimes(1)
     })
   })
 
@@ -167,7 +160,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(1)
 
@@ -180,34 +173,16 @@ describe('Form', () => {
           config: {
             format: 'inlined',
             depth: 'all',
-            isCDv1: false,
           },
-          id: 'f0c61d3970237e725866704d6fa5487d7fce557d',
+          id: '1b0ea33d365f8719b11762ad0ab45f80357ce200',
         }
       )
 
       expect(emit).toHaveBeenCalledTimes(1)
 
-      // tslint:disable-next-line
-      const dispose3 = form.changed((model) => {}, { isCDv1: true })
-
-      expect(emit).toHaveBeenCalledWith(
-        'visualisation-sdk:form:changed-config',
-        {
-          config: {
-            scope: 'tree',
-            fullBodyObject: true,
-            isCDv1: true,
-          },
-          id: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274',
-        }
-      )
-
-      expect(emit).toHaveBeenCalledTimes(2)
-
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(2)
 
@@ -215,7 +190,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(1)
 
@@ -223,21 +198,7 @@ describe('Form', () => {
 
       expect(
         form.changeHandlerContainer.changeHandlers.get(
-          'f0c61d3970237e725866704d6fa5487d7fce557d'
-        )?.size
-      ).toBe(0)
-
-      expect(
-        form.changeHandlerContainer.changeHandlers.get(
-          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
-        )?.size
-      ).toBe(1)
-
-      dispose3()
-
-      expect(
-        form.changeHandlerContainer.changeHandlers.get(
-          '035b37f17fc6ad44dea8ff7f3fd84e17064d3274'
+          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
         )?.size
       ).toBe(0)
     })
@@ -258,25 +219,19 @@ describe('Form', () => {
       } as never) as ClientConnection
       const handler1 = jest.fn()
       const handler2 = jest.fn()
-      const handler3 = jest.fn()
 
       const form = new Form(connection)
 
       const dispose1 = form.changed(handler1)
       const dispose2 = form.changed(handler2)
-      const dispose3 = form.changed(handler3, { isCDv1: true })
 
-      run({ handlerId: 'f0c61d3970237e725866704d6fa5487d7fce557d', model: {} })
-
-      expect(handler1).toBeCalledTimes(1)
-      expect(handler2).toBeCalledTimes(1)
-      expect(handler3).not.toBeCalled()
-
-      run({ handlerId: '035b37f17fc6ad44dea8ff7f3fd84e17064d3274', model: {} })
+      run({ handlerId: '1b0ea33d365f8719b11762ad0ab45f80357ce200', model: {} })
 
       expect(handler1).toBeCalledTimes(1)
       expect(handler2).toBeCalledTimes(1)
-      expect(handler3).toBeCalledTimes(1)
+
+      expect(handler1).toBeCalledTimes(1)
+      expect(handler2).toBeCalledTimes(1)
     })
   })
 })

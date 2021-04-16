@@ -1,9 +1,6 @@
 export interface ISettings {
-  contentId: string
-  snapshotId: string
-  contentTypeId: string
-  device: IDevice
-  visualization: IVisualizationSetting
+  vse: string
+  devices: IDevice[]
 }
 
 export interface IDevice {
@@ -12,13 +9,4 @@ export interface IDevice {
   rotated: boolean
   orientate: boolean
   width: number
-}
-
-export interface IVisualizationSetting {
-  label: string
-  default: boolean
-  vseDomain: string
-  hasLocaleToken: boolean
-  templatedUri: string
-  actualTemplatedUri: string
 }

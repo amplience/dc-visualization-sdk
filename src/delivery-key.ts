@@ -13,7 +13,7 @@ export type DeliveryKeyChangeHandler = (deliveryKey: DeliveryKeyModel) => void
 export type DeliveryKeyChangeDispose = () => void
 
 /**
- * DeliveryKey class allows you to get the delivery key of the content item you're viewing  and watch for changes to asynchronously update your application
+ * DeliveryKey class allows you to get the delivery key of the content item you're viewing and watch for changes to asynchronously update your application
  */
 export class DeliveryKey {
   public changeHandlerContainer: HandlerContainer<DeliveryKeyChangeHandler>

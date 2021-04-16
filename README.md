@@ -241,7 +241,7 @@ Sets up a listener for when the visualization settings changes.
 `settings.changed` returns a function that when called removes the callback from being called on changes.
 
 ```typescript
-const dispose = visualization.deliveryKey.changed((model) => {
+const dispose = visualization.settings.changed((model) => {
   // handle deliveryKey change
 })
 ```
