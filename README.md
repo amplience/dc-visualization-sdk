@@ -65,8 +65,8 @@ These options are shared between `form.get()`, `form.change()` and `form.save()`
 
 | key    |  description                                                                        | value              | default   | 
 | ------ |  ---------------------------------------------------------------------------------- | ------------------- | --------- | 
-| `format` | Either return an array of all linked content items or have the data inlined.      | `'inlined'`, `'linked'` | `'inlined'` | 
-| `depth`  | Either return all linked content or just the root content item.                   | `'all'`, `'root'`       | `'all'`     | 
+| `format` | Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined).      | `'inlined'`, `'linked'` | `'inlined'` | 
+| `depth`  | Either return all linked content (all) or just the root content item (root).                   | `'all'`, `'root'`       | `'all'`     | 
 
 <br />
 
