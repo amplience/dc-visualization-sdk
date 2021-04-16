@@ -26,71 +26,42 @@ Using cdn:
 ```html
 <script src="https://unpkg.com/dc-visualization-sdk/dist/dc-visualization-sdk.umd.js"></script>
 ```
-
 # Usage
 
-In order to create a connection to DC you first need to initiate the SDK with `visualization.init()`. Once initiated you can subscribe to change events in the content form with `visualization.form.changed(<callback>)`.
+In order to create a connection to DC you first need to initiate the SDK with `init()` method. Once connected you are given an [SDK object]() you can use to subscribe to change events in the content form `<sdk>.form.changed(<callback>)`, amongst other things.
 
 Examples of this are shown below:
 
 ```typescript
-import visualization from 'dc-visualization-sdk';
-
-async function initialize() {
-  try {
-    await visualization.init();
-    const unsubscribe = visualization.form.changed((model) => {
-      // handle form model change
-    })
-  } catch (err) {
-    // unable to connect
-  }
-}
+import { init } from 'dc-visualization-sdk';
+const sdk = await init();
+const unsubscribe = sdk.form.changed((model) => {
+  // handle form model change
+});
 ```
 
 or
 
-```typescript
-import { init, form } from 'dc-visualization-sdk';
-
-async function initialize() {
-  try {
-    await init();
-    const unsubscribe = form.changed((model) => {
-      // handle form model change
-    })
-  } catch (err) {
-    // unable to connect
-  }
-}
-```
-
-or
-
-```typescript
-import visualization from 'dc-visualization-sdk';
-
-visualization.init().then((sdk) => {
+```javascript
+const visSDK = require('dc-visualization-sdk');
+visSDK.init().then((sdk) => {
   const unsubscribe = sdk.form.changed((model) => {
     // handle form model change
   });
-}).catch((err){
-  // unable to connect
 });
 ```
 ## Form
 
-The `Form` class allows you to get the current state of the Content Form as well as subscribe to any changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
+The [Form class]() allows you to get the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
 
-These methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.
+>Note: **These methods will only return content when the form content is valid (e.g. if a required field is missing no content will be returned).** Additionally methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.
 
-By default JSON is returned as it would be from the Content Delivery API (CDv2), you can also choose to use the legacy JSON-LD format (CDv1).
-
-In addition you can set the same parameters that are available in the Delivery APIs. These let you only return just the root content item or all linked items. You can also choose to return references to the items or a fully hydrated tree.
+In addition you can set the same parameters that are available in the Delivery API, see the table below for more information.
 
 <br/>
 
-### Options for Content Delivery API (CDv2)
+### Options
+These options are shared between `form.get()`, `form.change()` and `form.save()`.
 
 | key    |  description                                                                        | value              | default   | 
 | ------ |  ---------------------------------------------------------------------------------- | ------------------- | --------- | 
@@ -99,34 +70,35 @@ In addition you can set the same parameters that are available in the Delivery A
 
 <br />
 
-### Options for JSON-LD format (CDv1)
-
-| key            | description                                                              | value         | default | 
-| -------------- | ------------------------------------------------------------------------ | -------------- | ------- | 
-| `isCDv1`         | Needs to be enabled to return the model in the CDv1 format.            | `boolean`        | `false`   |
-| `fullBodyObject` | Either return the content for linked items or just an id.              | `boolean`        | `true`    | 
-| `scope`          | Either return all linked content or just the root content item.        | `'tree'`, `'root'` | `'tree'`  | 
-
----
-
-<br />
 
 ### form.get()
 
-This method will retrieve the current state of the form.
+This method will retrieve the current state of the form. By default JSON is returned as a fully hydrated tree, to change this see the table above for a full list of options.
 
 > Note: this method is only available in the Production Content Form
 
 ```typescript
-import visualization from 'dc-visualization-sdk';
-
 const options = {
   format: 'linked'
   depth: 'all'
 };
 
-visualization.form.get(options).then(model => {
+sdk.form.get(options).then(model => {
     // handle form model
+});
+```
+
+### form.saved()
+
+This method is for subscribing to the save event in the Content Form while editing. You provide a callback which will execute on every save. The method returns an unsubscribe function that when called will stop any further executions of the callback.
+
+By default JSON is returned as a fully hydrated tree, to change this see the table above for a full list of options.
+
+> Note: this method is only available in the Production Content Form
+
+```typescript
+const unsubscribe = sdk.form.saved((model) => {
+  // handle form model
 });
 ```
 
@@ -139,22 +111,20 @@ By default JSON is returned as it would be from the Content Delivery API (CDv2),
 > Note: this method is only available in the Production Content Form
 
 ```typescript
-import visualization from 'dc-visualization-sdk'
-
-const unsubscribe = visualization.form.changed((model) => {
+const unsubscribe = sdk.form.changed((model) => {
   // handle form model
 });
 ```
 ## Locale
 
-The `Locale` class allows you to retrieve the currently selected locale in the visualization options and watch for changes to this option.
+The [Locale class]() allows you to retrieve the currently selected locale in the visualization options and watch for changes to this option.
 
 ### locale.get()
 
 This method will retrieve the current locale selected in the visualization options. The method returns a promise that resolves either to the selected locale string e.g. `'en-GB'` or `null` if none are selected.
 
 ```typescript
-const value = await visualization.locale.get();
+const value = await sdk.locale.get();
 
 console.log(value);
 // 'en-GB'
@@ -165,7 +135,7 @@ console.log(value);
 This method is for subscribing to changes to the selected locale in the visualization options. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.
 
 ```typescript
-const unsubscribe = visualization.locale.changed((model) => {
+const unsubscribe = sdk.locale.changed((model) => {
   // handle locale change
 });
 ```
@@ -176,10 +146,10 @@ The `DeliveryKey` class allows you to retrieve the delivery key of the content i
 
 ### deliveryKey.get()
 
-This method will retrieve the current Delivery Key of the content item being visualized. The method returns a promise that resolves to the set delivery key string i.e `carousel-home-page` or `null` if no key is set.
+This method will retrieve the current Delivery Key of the content item being visualized. The method returns a promise that resolves to the set delivery key string i.e `'carousel-home-page'` or `null` if no key is set.
 
 ```typescript
-const value = await visualization.deliveryKey.get();
+const value = await sdk.deliveryKey.get();
 
 console.log(value);
 // 'carousel-home-page'
@@ -190,33 +160,89 @@ console.log(value);
 This method is for subscribing to changes to the Delivery Key of the content item being visualized. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.
 
 ```typescript
-const unsubscribe = visualization.deliveryKey.changed((model) => {
+const unsubscribe = sdk.deliveryKey.changed((model) => {
   // handle deliveryKey change
 });
 ```
+## Device
 
-## Settings
+The [Device class]() allows you to retrieve the currently selected device in the visualization options and watch for changes to this option.
 
-The `Settings` class allows you to retrieve and watch for changes to the currently selected visualization settings for the content item being visualized. This includes the `contentId`, `contentTypeId`, `snapshotId` and the device and visualization settings.
+### device.get()
 
-### settings.get()
-
-This method will retrieve the current visualization settings for the content item being visualized. The method returns a promise that resolves to a settings object.
+This method will retrieve the current device selected in the visualization options. The method returns a promise that resolves to the selected device.
 
 ```typescript
-const value = await visualization.settings.get();
-
-console.log(value);
+const device = await sdk.device.get();
 ```
 
-### settings.changed()
+### device.changed()
 
-This method is for subscribing to changes to the settings object. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.
+This method is for subscribing to changes to the selected device in the visualization options. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.
 
 ```typescript
-const unsubscribe = visualization.settings.changed((model) => {
+const unsubscribe = sdk.device.changed((model) => {
   // handle settings change
 });
 ```
+## Settings
+
+The [Settings class]() allows you to retrieve your DC visualization settings.
+
+### settings.get()
+
+This method will retrieve the current visualization settings for the hub that the content item being visualized is in. The method returns a promise that resolves to a settings object.
+
+```typescript
+const settings = await sdk.settings.get();
+```
+
+```json
+{
+  "vse":"fasdfasdfasdf",
+  "devices" : [{
+    "name" : "Desktop",
+    "width" : 1024,
+    "height" : 768,
+    "orientate" : true
+  }, {
+    "name" : "Tablet",
+    "width" : 640,
+    "height" : 768,
+    "orientate" : true
+  }, {
+    "name" : "Mobile",
+    "width" : 320,
+    "height" : 512,
+    "orientate" : true
+  }, {
+    "name" : "Desktop Large",
+    "width" : 1440,
+    "height" : 900,
+    "orientate" : true
+  }]
+}
+```
+
+## Context
+
+The [Context class]() allows you to the retrive the current context the visualisation is in.
+
+### context.get()
+
+This method will retrieve the current context object. The method returns a promise that resolves to a context object.
+
+```typescript
+const context = await sdk.context.get();
+```
+
+```json
+{
+  "contentId": "<uuid>",
+  "snapshotId": "<uuid>",
+  "contentTypeId": "<uri>"
+}
+```
+
 
 
