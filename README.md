@@ -52,7 +52,7 @@ visSDK.init().then((sdk) => {
 ```
 ## Form
 
-The [Form class]() allows you to get the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
+The [Form class]() allows you to retrieve the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
 
 >Note: **These methods will only return content when the form content is valid (e.g. if a required field is missing no content will be returned).** Additionally methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.
 
@@ -199,7 +199,7 @@ const settings = await sdk.settings.get();
 
 ```json
 {
-  "vse":"fasdfasdfasdf",
+  "vse":"<vse url>",
   "devices" : [{
     "name" : "Desktop",
     "width" : 1024,
@@ -226,7 +226,7 @@ const settings = await sdk.settings.get();
 
 ## Context
 
-The [Context class]() allows you to the retrive the current context the visualisation is in.
+The [Context class]() allows you to the retrieve the current context the visualisation is in.
 
 ### context.get()
 
@@ -243,6 +243,3 @@ const context = await sdk.context.get();
   "contentTypeId": "<uri>"
 }
 ```
-
-
-
