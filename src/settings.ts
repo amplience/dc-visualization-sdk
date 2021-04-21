@@ -1,33 +1,33 @@
-import { ClientConnection } from 'message-event-channel'
-import { ISettings } from './interfaces/settings'
-import { HandlerContainer, HandlerContainerFactory } from './handler-container'
+import { ClientConnection } from 'message-event-channel';
+import { ISettings } from './interfaces/settings';
+import { HandlerContainer, HandlerContainerFactory } from './handler-container';
 
-export const KEY = 'visualisation-sdk:settings'
+export const KEY = 'visualisation-sdk:settings';
 
 export enum SETTINGS_EVENTS {
   GET = 'visualisation-sdk:settings:get',
   CHANGE = 'visualisation-sdk:settings:change',
 }
 
-export type SettingsModel = ISettings
+export type SettingsModel = ISettings;
 
-export type SettingsChangeHandler = (settings: SettingsModel) => void
-export type SettingsChangeDispose = () => void
+export type SettingsChangeHandler = (settings: SettingsModel) => void;
+export type SettingsChangeDispose = () => void;
 
 /**
  * Settings class allows you to get the currently selected visualization settings in the form such as Device selected, vse URL, contentId and snapshotId and watch for changes to asynchronously update your application
  */
 export class Settings {
-  public changeHandlerContainer: HandlerContainer<SettingsChangeHandler>
+  public changeHandlerContainer: HandlerContainer<SettingsChangeHandler>;
 
   constructor(public connection: ClientConnection) {
-    const handlerContainer = HandlerContainerFactory(connection)
+    const handlerContainer = HandlerContainerFactory(connection);
 
-    this.changeHandlerContainer = handlerContainer<SettingsChangeHandler>()
+    this.changeHandlerContainer = handlerContainer<SettingsChangeHandler>();
 
     this.connection.on(SETTINGS_EVENTS.CHANGE, (settings: SettingsModel) => {
-      this.changeHandlerContainer.run(settings)
-    })
+      this.changeHandlerContainer.run(settings);
+    });
   }
 
   /**
@@ -42,7 +42,7 @@ export class Settings {
    * ```
    */
   get(): Promise<SettingsModel> {
-    return this.connection.request(SETTINGS_EVENTS.GET)
+    return this.connection.request(SETTINGS_EVENTS.GET);
   }
 
   /**
@@ -61,6 +61,6 @@ export class Settings {
    * ```
    */
   changed(cb: SettingsChangeHandler): SettingsChangeDispose {
-    return this.changeHandlerContainer.add(cb)
+    return this.changeHandlerContainer.add(cb);
   }
 }

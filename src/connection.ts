@@ -1,4 +1,4 @@
-import { ClientConnection, MC_EVENTS } from 'message-event-channel'
+import { ClientConnection, MC_EVENTS } from 'message-event-channel';
 
 export enum CONNECTION_ERRORS {
   /**
@@ -9,39 +9,39 @@ export enum CONNECTION_ERRORS {
 }
 
 export interface ClientConnectionConfig {
-  connectionTimeout: boolean | number
-  timeout: boolean | number
-  debug: boolean
+  connectionTimeout: boolean | number;
+  timeout: boolean | number;
+  debug: boolean;
 }
 
 export interface Context {
-  contentId: string
-  contentTypeId: string
-  snapshotId: string | null
+  contentId: string;
+  contentTypeId: string;
+  snapshotId: string | null;
 }
 
 export enum CONNECTION_EVENTS {
   CONTEXT = 'visualisation-sdk:context:get',
 }
 export class Visualization {
-  public connection!: ClientConnection
+  public connection!: ClientConnection;
 
   private readonly DEFAULT_OPTIONS = {
     connectionTimeout: false,
     timeout: false,
     debug: false,
-  }
+  };
 
   static create(options: Partial<ClientConnectionConfig> = {}) {
-    const core = new Visualization(options)
+    const core = new Visualization(options);
 
-    return core
+    return core;
   }
 
   constructor(options: Partial<ClientConnectionConfig> = {}) {
     this.connection = new ClientConnection(
       Object.assign({}, this.DEFAULT_OPTIONS, options)
-    )
+    );
   }
 
   /**
@@ -60,17 +60,17 @@ export class Visualization {
    * ```
    */
   async init(): Promise<true> {
-    this.connection.init()
+    this.connection.init();
 
     return new Promise((resolve, reject) => {
-      this.connection.on(MC_EVENTS.CONNECTED, () => resolve(true))
+      this.connection.on(MC_EVENTS.CONNECTED, () => resolve(true));
       this.connection.on(MC_EVENTS.CONNECTION_TIMEOUT, () =>
         reject(CONNECTION_ERRORS.CONNECTION_TIMEOUT)
-      )
-    })
+      );
+    });
   }
 
   async context() {
-    return this.connection.request<Context>(CONNECTION_EVENTS.CONTEXT)
+    return this.connection.request<Context>(CONNECTION_EVENTS.CONTEXT);
   }
 }

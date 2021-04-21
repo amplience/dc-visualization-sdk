@@ -1,32 +1,32 @@
-import { ClientConnection } from 'message-event-channel'
-import { HandlerContainer, HandlerContainerFactory } from './handler-container'
+import { ClientConnection } from 'message-event-channel';
+import { HandlerContainer, HandlerContainerFactory } from './handler-container';
 
-export const KEY = 'visualisation-sdk:locale'
+export const KEY = 'visualisation-sdk:locale';
 
 export enum LOCALE_EVENTS {
   GET = 'visualisation-sdk:locale:get',
   CHANGE = 'visualisation-sdk:locale:change',
 }
 
-export type LocaleModel = string | null
+export type LocaleModel = string | null;
 
-export type LocaleChangeHandler = (locale: LocaleModel) => void
-export type LocaleChangeDispose = () => void
+export type LocaleChangeHandler = (locale: LocaleModel) => void;
+export type LocaleChangeDispose = () => void;
 
 /**
  * Locale class allows you to get the currently selected locale in the form and watch for changes to asynchronously update your application
  */
 export class Locale {
-  public changeHandlerContainer: HandlerContainer<LocaleChangeHandler>
+  public changeHandlerContainer: HandlerContainer<LocaleChangeHandler>;
 
   constructor(public connection: ClientConnection) {
-    const handlerContainer = HandlerContainerFactory(connection)
+    const handlerContainer = HandlerContainerFactory(connection);
 
-    this.changeHandlerContainer = handlerContainer<LocaleChangeHandler>()
+    this.changeHandlerContainer = handlerContainer<LocaleChangeHandler>();
 
     this.connection.on(LOCALE_EVENTS.CHANGE, (locale: LocaleModel) => {
-      this.changeHandlerContainer.run(locale)
-    })
+      this.changeHandlerContainer.run(locale);
+    });
   }
 
   /**
@@ -41,7 +41,7 @@ export class Locale {
    * ```
    */
   get(): Promise<LocaleModel> {
-    return this.connection.request(LOCALE_EVENTS.GET)
+    return this.connection.request(LOCALE_EVENTS.GET);
   }
 
   /**
@@ -60,6 +60,6 @@ export class Locale {
    * ```
    */
   changed(cb: LocaleChangeHandler): LocaleChangeDispose {
-    return this.changeHandlerContainer.add(cb)
+    return this.changeHandlerContainer.add(cb);
   }
 }

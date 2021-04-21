@@ -65,7 +65,6 @@
     ]
   },
   "prettier": {
-    "semi": false,
     "singleQuote": true
   },
   "commitlint": {
