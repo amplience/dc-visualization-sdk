@@ -1,10 +1,10 @@
 export interface CDv1Response<Types = Record<string, any>[]> {
-  '@context': 'http://context.system.cms.amplience.com/v0.0/api'
-  '@type': 'QueryResult'
+  '@context': 'http://context.system.cms.amplience.com/v0.0/api';
+  '@type': 'QueryResult';
   result: [
     {
-      '@id': string
+      '@id': string;
     }
-  ]
-  '@graph': Types
+  ];
+  '@graph': Types;
 }
