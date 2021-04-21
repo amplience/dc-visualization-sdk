@@ -230,7 +230,7 @@ There is some additional contextual information available on the SDK object thes
 ```js
 sdk.contentId; // Content Item Id of the content item being visualized
 
-sdk.snapshotId; // Snapshot Id of the content item being visualized
+sdk.snapshotId; // Snapshot Id of the content item being visualized (note: snapshotId is only available in planning)
 
 sdk.contentTypeId; // Content Type Id of the content item being visualized
 
