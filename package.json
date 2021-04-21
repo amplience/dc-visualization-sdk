@@ -7,8 +7,10 @@
   "typings": "dist/types/dc-visualization-core.d.ts",
   "scripts": {
     "prepare": "npm run build",
-    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "lint:fix": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts' --fix",
+    "lint": "npm run prettier -- --check && npm run tslint",
+    "lint:fix":  "npm run prettier -- --write && npm run tslint -- --fix",
+    "tslint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts'",
+    "prettier": "prettier \"src/**/*.ts\"",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs src/dc-visualization-core.ts --media media/  --excludeInternal",
     "build:watch": "tsc --module commonjs && rollup -c rollup.config.ts -w",
@@ -27,7 +29,7 @@
   "author": "",
   "license": "ISC",
   "lint-staged": {
-    "{src,test}/**/*.ts": [
+    "{src}/**/*.ts": [
       "prettier --write",
       "git add"
     ]
@@ -65,7 +67,8 @@
     ]
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "commitlint": {
     "extends": [
@@ -86,6 +89,7 @@
     "lint-staged": "^10.5.2",
     "lodash": "^4.17.20",
     "lodash.camelcase": "^4.3.0",
+    "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.36.1",
     "rollup-plugin-commonjs": "^10.1.0",
