@@ -19,17 +19,15 @@ jest.mock('../connection', () => ({
   },
 }));
 
-import {
-  init,
-  Form,
-  Locale,
-  Settings,
-  DeliveryKey,
-  FORM_EVENTS,
-  LOCALE_EVENTS,
-  SETTINGS_EVENTS,
-  DELIVERY_KEY_EVENTS,
-} from '../dc-visualization-core';
+import { init } from '../dc-visualization-core';
+
+import { Form, FORM_EVENTS } from '../form';
+
+import { Locale, LOCALE_EVENTS } from '../locale';
+
+import { Settings, SETTINGS_EVENTS } from '../settings';
+
+import { DeliveryKey, DELIVERY_KEY_EVENTS } from '../delivery-key';
 
 describe('core smoke test', () => {
   beforeEach(() => {

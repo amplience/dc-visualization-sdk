@@ -2,18 +2,12 @@
  * @module dc-visualisation-sdk
  */
 
-import { Form, OnChangeHandler, FORM_EVENTS } from './form';
+import { Form, OnChangeHandler } from './form';
 
-import {
-  Locale,
-  LOCALE_EVENTS,
-  LocaleChangeDispose,
-  LocaleModel,
-} from './locale';
+import { Locale, LocaleChangeDispose, LocaleModel } from './locale';
 
 import {
   Settings,
-  SETTINGS_EVENTS,
   SettingsChangeDispose,
   SettingsChangeHandler,
   SettingsModel,
@@ -21,7 +15,6 @@ import {
 
 import {
   DeliveryKey,
-  DELIVERY_KEY_EVENTS,
   DeliveryKeyChangeDispose,
   DeliveryKeyChangeHandler,
   DeliveryKeyModel,
@@ -70,27 +63,15 @@ export default { init };
 export {
   init,
   DcVisualizationStatic,
-  Form,
   OnChangeHandler,
-  FORM_EVENTS,
-  Locale,
-  LOCALE_EVENTS,
   LocaleChangeDispose,
   LocaleModel,
-  Settings,
-  SETTINGS_EVENTS,
   SettingsChangeDispose,
   SettingsChangeHandler,
   SettingsModel,
-  DeliveryKey,
-  DELIVERY_KEY_EVENTS,
   DeliveryKeyChangeDispose,
   DeliveryKeyChangeHandler,
   DeliveryKeyModel,
-  Visualization,
-  CONNECTION_ERRORS,
-  CONNECTION_EVENTS,
-  Context,
 };
 
 export * from './interfaces/cd1-response';
