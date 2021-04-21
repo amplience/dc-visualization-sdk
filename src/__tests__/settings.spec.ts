@@ -16,7 +16,7 @@ describe('Settings', () => {
       const result = await settings.get();
 
       expect(connection.request).toBeCalledWith(
-        'visualisation-sdk:settings:get'
+        'visualization-sdk:settings:get'
       );
       expect(result).toEqual({ hub: '123' });
     });

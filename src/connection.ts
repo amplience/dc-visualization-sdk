@@ -21,7 +21,7 @@ export interface Context {
 }
 
 export enum CONNECTION_EVENTS {
-  CONTEXT = 'visualisation-sdk:context:get',
+  CONTEXT = 'visualization-sdk:context:get',
 }
 export class Visualization {
   public connection!: ClientConnection;

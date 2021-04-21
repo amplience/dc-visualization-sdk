@@ -15,7 +15,7 @@ describe('Locale', () => {
       const locale = new Locale(connection);
       const result = await locale.get();
 
-      expect(connection.request).toBeCalledWith('visualisation-sdk:locale:get');
+      expect(connection.request).toBeCalledWith('visualization-sdk:locale:get');
       expect(result).toEqual('en-GB');
     });
   });
