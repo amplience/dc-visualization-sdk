@@ -2,14 +2,14 @@
  * @module dc-visualisation-sdk
  */
 
-import { Form, OnChangeHandler, FORM_EVENTS } from './form'
+import { Form, OnChangeHandler, FORM_EVENTS } from './form';
 
 import {
   Locale,
   LOCALE_EVENTS,
   LocaleChangeDispose,
   LocaleModel,
-} from './locale'
+} from './locale';
 
 import {
   Settings,
@@ -17,7 +17,7 @@ import {
   SettingsChangeDispose,
   SettingsChangeHandler,
   SettingsModel,
-} from './settings'
+} from './settings';
 
 import {
   DeliveryKey,
@@ -25,38 +25,51 @@ import {
   DeliveryKeyChangeDispose,
   DeliveryKeyChangeHandler,
   DeliveryKeyModel,
-} from './delivery-key'
+} from './delivery-key';
 
-import { Visualization, ERRORS_INIT } from './connection'
+import {
+  Visualization,
+  CONNECTION_ERRORS,
+  ClientConnectionConfig,
+  CONNECTION_EVENTS,
+  Context,
+} from './connection';
 
-/** @internal */
-const visualisation = Visualization.create()
+interface DcVisualizationStatic extends Context {
+  form: Form;
+  locale: Locale;
+  settings: Settings;
+  deliveryKey: DeliveryKey;
+}
 
-const form = new Form(visualisation.connection)
-const locale = new Locale(visualisation.connection)
-const settings = new Settings(visualisation.connection)
-const deliveryKey = new DeliveryKey(visualisation.connection)
+const init = async (
+  options: Partial<ClientConnectionConfig> = {}
+): Promise<DcVisualizationStatic> => {
+  const visualisation = Visualization.create(options);
 
-const init = async () => {
-  await visualisation.init()
+  const form = new Form(visualisation.connection);
+  const locale = new Locale(visualisation.connection);
+  const settings = new Settings(visualisation.connection);
+  const deliveryKey = new DeliveryKey(visualisation.connection);
+
+  await visualisation.init();
+
+  const context = await visualisation.context();
 
   return {
     form,
     locale,
     settings,
     deliveryKey,
-  }
-}
+    ...context,
+  };
+};
 
-export default { init, form, locale, settings, deliveryKey }
+export default { init };
 
 export {
-  visualisation,
-  form,
-  locale,
-  settings,
-  deliveryKey,
   init,
+  DcVisualizationStatic,
   Form,
   OnChangeHandler,
   FORM_EVENTS,
@@ -75,10 +88,12 @@ export {
   DeliveryKeyChangeHandler,
   DeliveryKeyModel,
   Visualization,
-  ERRORS_INIT,
-}
+  CONNECTION_ERRORS,
+  CONNECTION_EVENTS,
+  Context,
+};
 
-export * from './interfaces/cd1-response'
-export * from './interfaces/cd2-response'
-export * from './interfaces/settings'
-export * from './interfaces/form-handler'
+export * from './interfaces/cd1-response';
+export * from './interfaces/cd2-response';
+export * from './interfaces/settings';
+export * from './interfaces/form-handler';

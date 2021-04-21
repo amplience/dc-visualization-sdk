@@ -1,23 +1,47 @@
-import { ClientConnection, MC_EVENTS } from 'message-event-channel'
+import { ClientConnection, MC_EVENTS } from 'message-event-channel';
 
-export enum ERRORS_INIT {
+export enum CONNECTION_ERRORS {
   /**
    * Extension failed to connect to Dynamic content
    */
   CONNECTION_TIMEOUT = 'Failed to establish connection to DC Application',
+  NO_CONNECTION = `Connection has not been made yet`,
 }
 
+export interface ClientConnectionConfig {
+  connectionTimeout: boolean | number;
+  timeout: boolean | number;
+  debug: boolean;
+}
+
+export interface Context {
+  contentId: string;
+  contentTypeId: string;
+  snapshotId: string | null;
+}
+
+export enum CONNECTION_EVENTS {
+  CONTEXT = 'visualisation-sdk:context:get',
+}
 export class Visualization {
-  public connection = new ClientConnection({
+  public connection!: ClientConnection;
+
+  private readonly DEFAULT_OPTIONS = {
     connectionTimeout: false,
     timeout: false,
     debug: false,
-  })
+  };
 
-  static create() {
-    const core = new Visualization()
+  static create(options: Partial<ClientConnectionConfig> = {}) {
+    const core = new Visualization(options);
 
-    return core
+    return core;
+  }
+
+  constructor(options: Partial<ClientConnectionConfig> = {}) {
+    this.connection = new ClientConnection(
+      Object.assign({}, this.DEFAULT_OPTIONS, options)
+    );
   }
 
   /**
@@ -35,14 +59,18 @@ export class Visualization {
    * }
    * ```
    */
-  async init(): Promise<void> {
-    this.connection.init()
+  async init(): Promise<true> {
+    this.connection.init();
 
     return new Promise((resolve, reject) => {
-      this.connection.on(MC_EVENTS.CONNECTED, () => resolve())
+      this.connection.on(MC_EVENTS.CONNECTED, () => resolve(true));
       this.connection.on(MC_EVENTS.CONNECTION_TIMEOUT, () =>
-        reject(ERRORS_INIT.CONNECTION_TIMEOUT)
-      )
-    })
+        reject(CONNECTION_ERRORS.CONNECTION_TIMEOUT)
+      );
+    });
+  }
+
+  async context() {
+    return this.connection.request<Context>(CONNECTION_EVENTS.CONTEXT);
   }
 }
