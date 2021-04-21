@@ -1,5 +1,5 @@
 /**
- * @module dc-visualisation-sdk
+ * @module dc-visualization-sdk
  */
 
 import { Form, OnChangeHandler } from './form';
@@ -38,16 +38,16 @@ interface DcVisualizationStatic extends Context {
 const init = async (
   options: Partial<ClientConnectionConfig> = {}
 ): Promise<DcVisualizationStatic> => {
-  const visualisation = Visualization.create(options);
+  const visualization = Visualization.create(options);
 
-  const form = new Form(visualisation.connection);
-  const locale = new Locale(visualisation.connection);
-  const settings = new Settings(visualisation.connection);
-  const deliveryKey = new DeliveryKey(visualisation.connection);
+  const form = new Form(visualization.connection);
+  const locale = new Locale(visualization.connection);
+  const settings = new Settings(visualization.connection);
+  const deliveryKey = new DeliveryKey(visualization.connection);
 
-  await visualisation.init();
+  await visualization.init();
 
-  const context = await visualisation.context();
+  const context = await visualization.context();
 
   return {
     form,

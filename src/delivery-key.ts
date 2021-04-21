@@ -1,11 +1,11 @@
 import { ClientConnection } from 'message-event-channel';
 import { HandlerContainer, HandlerContainerFactory } from './handler-container';
 
-export const KEY = 'visualisation-sdk:delivery-key';
+export const KEY = 'visualization-sdk:delivery-key';
 
 export enum DELIVERY_KEY_EVENTS {
-  GET = 'visualisation-sdk:delivery-key:get',
-  CHANGE = 'visualisation-sdk:delivery-key:change',
+  GET = 'visualization-sdk:delivery-key:get',
+  CHANGE = 'visualization-sdk:delivery-key:change',
 }
 
 export type DeliveryKeyModel = string | null;

@@ -1,11 +1,11 @@
 import { ClientConnection } from 'message-event-channel';
 import { HandlerContainer, HandlerContainerFactory } from './handler-container';
 
-export const KEY = 'visualisation-sdk:locale';
+export const KEY = 'visualization-sdk:locale';
 
 export enum LOCALE_EVENTS {
-  GET = 'visualisation-sdk:locale:get',
-  CHANGE = 'visualisation-sdk:locale:change',
+  GET = 'visualization-sdk:locale:get',
+  CHANGE = 'visualization-sdk:locale:change',
 }
 
 export type LocaleModel = string | null;

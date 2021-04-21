@@ -13,14 +13,14 @@ import {
   RequestConfigContainer,
 } from './request-config';
 
-export const KEY = 'visualisation-sdk:dc-form';
+export const KEY = 'visualization-sdk:dc-form';
 
 export enum FORM_EVENTS {
-  GET = 'visualisation-sdk:form:get',
-  CHANGE = 'visualisation-sdk:form:change',
-  SAVED = 'visualisation-sdk:form:saved',
-  CHANGED_CONFIG = 'visualisation-sdk:form:changed-config',
-  SAVED_CONFIG = 'visualisation-sdk:form:saved-config',
+  GET = 'visualization-sdk:form:get',
+  CHANGE = 'visualization-sdk:form:change',
+  SAVED = 'visualization-sdk:form:saved',
+  CHANGED_CONFIG = 'visualization-sdk:form:changed-config',
+  SAVED_CONFIG = 'visualization-sdk:form:saved-config',
 }
 
 export interface OnChangeHandler<Body = any> {

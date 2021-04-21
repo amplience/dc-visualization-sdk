@@ -2,11 +2,11 @@ import { ClientConnection } from 'message-event-channel';
 import { ISettings } from './interfaces/settings';
 import { HandlerContainer, HandlerContainerFactory } from './handler-container';
 
-export const KEY = 'visualisation-sdk:settings';
+export const KEY = 'visualization-sdk:settings';
 
 export enum SETTINGS_EVENTS {
-  GET = 'visualisation-sdk:settings:get',
-  CHANGE = 'visualisation-sdk:settings:change',
+  GET = 'visualization-sdk:settings:get',
+  CHANGE = 'visualization-sdk:settings:change',
 }
 
 export type SettingsModel = ISettings;

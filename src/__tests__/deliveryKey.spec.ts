@@ -16,7 +16,7 @@ describe('DeliveryKey', () => {
       const result = await deliveryKey.get();
 
       expect(connection.request).toBeCalledWith(
-        'visualisation-sdk:delivery-key:get'
+        'visualization-sdk:delivery-key:get'
       );
       expect(result).toEqual('some-content-key');
     });

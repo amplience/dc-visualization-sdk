@@ -15,7 +15,7 @@ describe('Form', () => {
       const form = new Form(connection);
       const result = await form.get({ depth: 'root' });
 
-      expect(connection.request).toBeCalledWith('visualisation-sdk:form:get', {
+      expect(connection.request).toBeCalledWith('visualization-sdk:form:get', {
         depth: 'root',
         format: 'inlined',
       });
@@ -34,7 +34,7 @@ describe('Form', () => {
       const form = new Form(connection);
       const result = await form.get();
 
-      expect(connection.request).toBeCalledWith('visualisation-sdk:form:get', {
+      expect(connection.request).toBeCalledWith('visualization-sdk:form:get', {
         depth: 'all',
         format: 'inlined',
       });
@@ -80,7 +80,7 @@ describe('Form', () => {
       // tslint:disable-next-line
       const dispose2 = form.saved((model) => {});
 
-      expect(emit).toHaveBeenCalledWith('visualisation-sdk:form:saved-config', {
+      expect(emit).toHaveBeenCalledWith('visualization-sdk:form:saved-config', {
         config: {
           format: 'inlined',
           depth: 'all',
@@ -168,7 +168,7 @@ describe('Form', () => {
       const dispose2 = form.changed((model) => {});
 
       expect(emit).toHaveBeenCalledWith(
-        'visualisation-sdk:form:changed-config',
+        'visualization-sdk:form:changed-config',
         {
           config: {
             format: 'inlined',
@@ -207,7 +207,7 @@ describe('Form', () => {
       // tslint:disable-next-line
       let run: Function = () => {};
       const on = jest.fn((key, _handler) => {
-        if (key === 'visualisation-sdk:form:change') {
+        if (key === 'visualization-sdk:form:change') {
           run = _handler;
         }
       });
