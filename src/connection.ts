@@ -15,9 +15,9 @@ export interface ClientConnectionConfig {
 }
 
 export interface Context {
-  contentId: string | null
-  snapshotId: string | null
+  contentId: string
   contentTypeId: string
+  snapshotId: string | null
 }
 
 export enum CONNECTION_EVENTS {

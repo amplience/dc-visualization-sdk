@@ -35,7 +35,7 @@ import {
   Context,
 } from './connection'
 
-interface DcVisualizationStatic {
+interface DcVisualizationStatic extends Context {
   form: Form
   locale: Locale
   settings: Settings
