@@ -1,16 +1,19 @@
-import { ClientConnection } from 'message-event-channel'
-import { CDv2Response } from './interfaces/cd2-response'
-import { HandlerContainer, HandlerContainerFactory } from './handler-container'
+import { ClientConnection } from 'message-event-channel';
+import { CDv2Response } from './interfaces/cd2-response';
+import { HandlerContainer, HandlerContainerFactory } from './handler-container';
 
 import {
   IModel,
   ModelChangeDispose,
   ModelChangeHandler,
-} from './interfaces/form-handler'
+} from './interfaces/form-handler';
 
-import { DeliveryRequestConfig, RequestConfigContainer } from './request-config'
+import {
+  DeliveryRequestConfig,
+  RequestConfigContainer,
+} from './request-config';
 
-export const KEY = 'visualisation-sdk:dc-form'
+export const KEY = 'visualisation-sdk:dc-form';
 
 export enum FORM_EVENTS {
   GET = 'visualisation-sdk:form:get',
@@ -21,8 +24,8 @@ export enum FORM_EVENTS {
 }
 
 export interface OnChangeHandler<Body = any> {
-  model: IModel<Body>
-  handlerId: string
+  model: IModel<Body>;
+  handlerId: string;
 }
 
 /**
@@ -33,37 +36,37 @@ export class Form {
   public changeHandlerContainer: HandlerContainer<
     ModelChangeHandler,
     Partial<DeliveryRequestConfig>
-  >
+  >;
   /** @internal */
   public savedHandlerContainer: HandlerContainer<
     ModelChangeHandler,
     Partial<DeliveryRequestConfig>
-  >
+  >;
   constructor(public connection: ClientConnection) {
-    const handlerContainer = HandlerContainerFactory(connection)
+    const handlerContainer = HandlerContainerFactory(connection);
 
     this.changeHandlerContainer = handlerContainer<
       ModelChangeHandler,
       Partial<DeliveryRequestConfig>
-    >(FORM_EVENTS.CHANGED_CONFIG)
+    >(FORM_EVENTS.CHANGED_CONFIG);
     this.savedHandlerContainer = handlerContainer<
       ModelChangeHandler,
       Partial<DeliveryRequestConfig>
-    >(FORM_EVENTS.SAVED_CONFIG)
+    >(FORM_EVENTS.SAVED_CONFIG);
 
     this.connection.on(
       FORM_EVENTS.CHANGE,
       ({ model, handlerId }: OnChangeHandler) => {
-        this.changeHandlerContainer.run<IModel>(model, handlerId)
+        this.changeHandlerContainer.run<IModel>(model, handlerId);
       }
-    )
+    );
 
     this.connection.on(
       FORM_EVENTS.SAVED,
       ({ model, handlerId }: OnChangeHandler) => {
-        this.savedHandlerContainer.run<IModel>(model, handlerId)
+        this.savedHandlerContainer.run<IModel>(model, handlerId);
       }
-    )
+    );
   }
 
   /**
@@ -83,10 +86,10 @@ export class Form {
    * ```
    */
   async get<Body = CDv2Response>(config: Partial<DeliveryRequestConfig> = {}) {
-    const { config: _config } = new RequestConfigContainer(config)
-    const model = await this.connection.request<Body>(FORM_EVENTS.GET, _config)
+    const { config: _config } = new RequestConfigContainer(config);
+    const model = await this.connection.request<Body>(FORM_EVENTS.GET, _config);
 
-    return model
+    return model;
   }
 
   /**
@@ -109,9 +112,9 @@ export class Form {
     cb: ModelChangeHandler<Body>,
     config: Partial<DeliveryRequestConfig> = {}
   ): ModelChangeDispose {
-    const { config: _config } = new RequestConfigContainer(config)
+    const { config: _config } = new RequestConfigContainer(config);
 
-    return this.savedHandlerContainer.add(cb, _config)
+    return this.savedHandlerContainer.add(cb, _config);
   }
 
   /**
@@ -134,8 +137,8 @@ export class Form {
     cb: ModelChangeHandler<Body>,
     config: Partial<DeliveryRequestConfig> = {}
   ): ModelChangeDispose {
-    const { config: _config } = new RequestConfigContainer(config)
+    const { config: _config } = new RequestConfigContainer(config);
 
-    return this.changeHandlerContainer.add(cb, _config)
+    return this.changeHandlerContainer.add(cb, _config);
   }
 }

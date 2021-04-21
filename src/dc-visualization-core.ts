@@ -2,14 +2,14 @@
  * @module dc-visualisation-sdk
  */
 
-import { Form, OnChangeHandler, FORM_EVENTS } from './form'
+import { Form, OnChangeHandler, FORM_EVENTS } from './form';
 
 import {
   Locale,
   LOCALE_EVENTS,
   LocaleChangeDispose,
   LocaleModel,
-} from './locale'
+} from './locale';
 
 import {
   Settings,
@@ -17,7 +17,7 @@ import {
   SettingsChangeDispose,
   SettingsChangeHandler,
   SettingsModel,
-} from './settings'
+} from './settings';
 
 import {
   DeliveryKey,
@@ -25,7 +25,7 @@ import {
   DeliveryKeyChangeDispose,
   DeliveryKeyChangeHandler,
   DeliveryKeyModel,
-} from './delivery-key'
+} from './delivery-key';
 
 import {
   Visualization,
@@ -33,28 +33,28 @@ import {
   ClientConnectionConfig,
   CONNECTION_EVENTS,
   Context,
-} from './connection'
+} from './connection';
 
 interface DcVisualizationStatic extends Context {
-  form: Form
-  locale: Locale
-  settings: Settings
-  deliveryKey: DeliveryKey
+  form: Form;
+  locale: Locale;
+  settings: Settings;
+  deliveryKey: DeliveryKey;
 }
 
 const init = async (
   options: Partial<ClientConnectionConfig> = {}
 ): Promise<DcVisualizationStatic> => {
-  const visualisation = Visualization.create(options)
+  const visualisation = Visualization.create(options);
 
-  const form = new Form(visualisation.connection)
-  const locale = new Locale(visualisation.connection)
-  const settings = new Settings(visualisation.connection)
-  const deliveryKey = new DeliveryKey(visualisation.connection)
+  const form = new Form(visualisation.connection);
+  const locale = new Locale(visualisation.connection);
+  const settings = new Settings(visualisation.connection);
+  const deliveryKey = new DeliveryKey(visualisation.connection);
 
-  await visualisation.init()
+  await visualisation.init();
 
-  const context = await visualisation.context()
+  const context = await visualisation.context();
 
   return {
     form,
@@ -62,10 +62,10 @@ const init = async (
     settings,
     deliveryKey,
     ...context,
-  }
-}
+  };
+};
 
-export default { init }
+export default { init };
 
 export {
   init,
@@ -91,9 +91,9 @@ export {
   CONNECTION_ERRORS,
   CONNECTION_EVENTS,
   Context,
-}
+};
 
-export * from './interfaces/cd1-response'
-export * from './interfaces/cd2-response'
-export * from './interfaces/settings'
-export * from './interfaces/form-handler'
+export * from './interfaces/cd1-response';
+export * from './interfaces/cd2-response';
+export * from './interfaces/settings';
+export * from './interfaces/form-handler';
