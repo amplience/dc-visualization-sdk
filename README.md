@@ -226,20 +226,12 @@ const settings = await sdk.settings.get();
 
 ## Context
 
-The [Context class]() allows you to the retrieve the current context the visualisation is in.
+There is some additional contextual information available on the SDK object these are as follows: 
+```js
+sdk.contentId; // Content Item Id of the content item being visualized
 
-### context.get()
+sdk.snapshotId; // Snapshot Id of the content item being visualized
 
-This method will retrieve the current context object. The method returns a promise that resolves to a context object.
+sdk.contentTypeId; // Content Type Id of the content item being visualized
 
-```typescript
-const context = await sdk.context.get();
-```
-
-```json
-{
-  "contentId": "<uuid>",
-  "snapshotId": "<uuid>",
-  "contentTypeId": "<uri>"
-}
 ```
