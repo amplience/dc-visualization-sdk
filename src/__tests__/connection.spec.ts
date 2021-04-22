@@ -1,5 +1,9 @@
 import { ClientConnection, MC_EVENTS } from 'message-event-channel';
-import { CONNECTION_ERRORS, CONNECTION_EVENTS, Visualization } from '../connection';
+import {
+  CONNECTION_ERRORS,
+  CONNECTION_EVENTS,
+  Visualization,
+} from '../connection';
 
 describe('Connection', () => {
   it('Connection smoke screen', () => {
