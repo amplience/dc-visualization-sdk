@@ -20,18 +20,20 @@ import {
   DeliveryKeyModel,
 } from './delivery-key';
 
+import { Visualization, ClientConnectionConfig, Context } from './connection';
+
 import {
-  Visualization,
-  CONNECTION_ERRORS,
-  ClientConnectionConfig,
-  CONNECTION_EVENTS,
-  Context,
-} from './connection';
+  Device,
+  DeviceChangeDispose,
+  DeviceChangeHandler,
+  DeviceModel,
+} from './device';
 
 interface DcVisualizationStatic extends Context {
   form: Form;
   locale: Locale;
   settings: Settings;
+  device: Device;
   deliveryKey: DeliveryKey;
 }
 
@@ -44,6 +46,7 @@ const init = async (
   const locale = new Locale(visualization.connection);
   const settings = new Settings(visualization.connection);
   const deliveryKey = new DeliveryKey(visualization.connection);
+  const device = new Device(visualization.connection);
 
   await visualization.init();
 
@@ -53,6 +56,7 @@ const init = async (
     form,
     locale,
     settings,
+    device,
     deliveryKey,
     ...context,
   };
@@ -72,6 +76,9 @@ export {
   DeliveryKeyChangeDispose,
   DeliveryKeyChangeHandler,
   DeliveryKeyModel,
+  DeviceChangeDispose,
+  DeviceChangeHandler,
+  DeviceModel,
 };
 
 export * from './interfaces/cd1-response';
