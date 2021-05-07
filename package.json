@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "npm run build",
     "lint": "npm run prettier -- --check && npm run tslint",
-    "lint:fix":  "npm run prettier -- --write && npm run tslint -- --fix",
+    "lint:fix": "npm run prettier -- --write && npm run tslint -- --fix",
     "tslint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts'",
     "prettier": "prettier \"src/**/*.ts\"",
     "prebuild": "rimraf dist",

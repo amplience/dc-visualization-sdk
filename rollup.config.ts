@@ -17,9 +17,6 @@ export default {
       name: camelCase(libraryName),
       format: 'umd',
       sourcemap: true,
-      globals: {
-        'object-hash': 'hash',
-      },
     },
     {
       file: pkg.module,
@@ -27,7 +24,6 @@ export default {
       sourcemap: true,
     },
   ],
-  external: ['object-hash'],
   watch: {
     include: 'src/**',
   },
