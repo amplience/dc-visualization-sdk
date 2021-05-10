@@ -2,7 +2,7 @@
 
 # dc-visualization-sdk
 
-[![Build Status](https://travis-ci.org/amplience/dc-visualization-sdk.svg?branch=master)](https://travis-ci.org/amplience/dc-visualization-sdk)
+[![build](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml/badge.svg?branch=main)](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml)
 [![npm version](https://badge.fury.io/js/dc-visualization-sdk.svg)](https://badge.fury.io/js/dc-visualization-sdk)
 
 `dc-visualization-sdk` enables real time visualizations that can be used in the Content Form in the Dynamic Content (DC) App.
@@ -26,6 +26,7 @@ Using cdn:
 ```html
 <script src="https://unpkg.com/dc-visualization-sdk/dist/dc-visualization-sdk.umd.js"></script>
 ```
+
 # Usage
 
 In order to create a connection to DC you first need to initiate the SDK with `init()` method. Once connected you are given an [SDK object]() you can use to subscribe to change events in the content form `<sdk>.form.changed(<callback>)`, amongst other things.
@@ -50,26 +51,27 @@ visSDK.init().then((sdk) => {
   });
 });
 ```
+
 ## Form
 
 The [Form class]() allows you to retrieve the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
 
->Note: **These methods will only return content when the form content is valid (e.g. if a required field is missing no content will be returned).** Additionally methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.
+> Note: **These methods will only return content when the form content is valid (e.g. if a required field is missing no content will be returned).** Additionally methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.
 
 In addition you can set the same parameters that are available in the Delivery API, see the table below for more information.
 
 <br/>
 
 ### Options
+
 These options are shared between `form.get()`, `form.change()` and `form.save()`.
 
-| key    |  description                                                                        | value              | default   | 
-| ------ |  ---------------------------------------------------------------------------------- | ------------------- | --------- | 
-| `format` | Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined).      | `'inlined'`, `'linked'` | `'inlined'` | 
-| `depth`  | Either return all linked content (all) or just the root content item (root).                   | `'all'`, `'root'`       | `'all'`     | 
+| key      | description                                                                                            | value                   | default     |
+| -------- | ------------------------------------------------------------------------------------------------------ | ----------------------- | ----------- |
+| `format` | Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined). | `'inlined'`, `'linked'` | `'inlined'` |
+| `depth`  | Either return all linked content (all) or just the root content item (root).                           | `'all'`, `'root'`       | `'all'`     |
 
 <br />
-
 
 ### form.get()
 
@@ -115,6 +117,7 @@ const unsubscribe = sdk.form.changed((model) => {
   // handle form model
 });
 ```
+
 ## Locale
 
 The [Locale class]() allows you to retrieve the currently selected locale in the visualization options and watch for changes to this option.
@@ -140,30 +143,6 @@ const unsubscribe = sdk.locale.changed((model) => {
 });
 ```
 
-## Delivery Key
-
-The `DeliveryKey` class allows you to retrieve the delivery key of the content item being visualized and watch for changes to this setting.
-
-### deliveryKey.get()
-
-This method will retrieve the current Delivery Key of the content item being visualized. The method returns a promise that resolves to the set delivery key string i.e `'carousel-home-page'` or `null` if no key is set.
-
-```typescript
-const value = await sdk.deliveryKey.get();
-
-console.log(value);
-// 'carousel-home-page'
-```
-
-### deliveryKey.changed()
-
-This method is for subscribing to changes to the Delivery Key of the content item being visualized. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.
-
-```typescript
-const unsubscribe = sdk.deliveryKey.changed((model) => {
-  // handle deliveryKey change
-});
-```
 ## Device
 
 The [Device class]() allows you to retrieve the currently selected device in the visualization options and watch for changes to this option.
@@ -185,6 +164,7 @@ const unsubscribe = sdk.device.changed((model) => {
   // handle settings change
 });
 ```
+
 ## Settings
 
 The [Settings class]() allows you to retrieve your DC visualization settings.
@@ -199,39 +179,44 @@ const settings = await sdk.settings.get();
 
 ```json
 {
-  "vse":"<vse url>",
-  "devices" : [{
-    "name" : "Desktop",
-    "width" : 1024,
-    "height" : 768,
-    "orientate" : true
-  }, {
-    "name" : "Tablet",
-    "width" : 640,
-    "height" : 768,
-    "orientate" : true
-  }, {
-    "name" : "Mobile",
-    "width" : 320,
-    "height" : 512,
-    "orientate" : true
-  }, {
-    "name" : "Desktop Large",
-    "width" : 1440,
-    "height" : 900,
-    "orientate" : true
-  }]
+  "vse": "<vse url>",
+  "devices": [
+    {
+      "name": "Desktop",
+      "width": 1024,
+      "height": 768,
+      "orientate": true
+    },
+    {
+      "name": "Tablet",
+      "width": 640,
+      "height": 768,
+      "orientate": true
+    },
+    {
+      "name": "Mobile",
+      "width": 320,
+      "height": 512,
+      "orientate": true
+    },
+    {
+      "name": "Desktop Large",
+      "width": 1440,
+      "height": 900,
+      "orientate": true
+    }
+  ]
 }
 ```
 
 ## Context
 
-There is some additional contextual information available on the SDK object these are as follows: 
+There is some additional contextual information available on the SDK object these are as follows:
+
 ```js
 sdk.contentId; // Content Item Id of the content item being visualized
 
 sdk.snapshotId; // Snapshot Id of the content item being visualized (note: snapshotId is only available in planning)
 
 sdk.contentTypeId; // Content Type Id of the content item being visualized
-
 ```

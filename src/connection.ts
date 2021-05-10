@@ -14,15 +14,6 @@ export interface ClientConnectionConfig {
   debug: boolean;
 }
 
-export interface Context {
-  contentId: string;
-  contentTypeId: string;
-  snapshotId: string | null;
-}
-
-export enum CONNECTION_EVENTS {
-  CONTEXT = 'visualization-sdk:context:get',
-}
 export class Visualization {
   public connection!: ClientConnection;
 
@@ -68,9 +59,5 @@ export class Visualization {
         reject(CONNECTION_ERRORS.CONNECTION_TIMEOUT)
       );
     });
-  }
-
-  async context() {
-    return this.connection.request<Context>(CONNECTION_EVENTS.CONTEXT);
   }
 }

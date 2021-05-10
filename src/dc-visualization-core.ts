@@ -13,14 +13,7 @@ import {
   SettingsModel,
 } from './settings';
 
-import {
-  DeliveryKey,
-  DeliveryKeyChangeDispose,
-  DeliveryKeyChangeHandler,
-  DeliveryKeyModel,
-} from './delivery-key';
-
-import { Visualization, ClientConnectionConfig, Context } from './connection';
+import { Visualization, ClientConnectionConfig } from './connection';
 
 import {
   Device,
@@ -29,12 +22,19 @@ import {
   DeviceModel,
 } from './device';
 
-interface DcVisualizationStatic extends Context {
+import {
+  Context,
+  ContextChangeDispose,
+  ContextChangeHandler,
+  ContextModel,
+} from './context';
+
+interface DcVisualizationStatic {
   form: Form;
   locale: Locale;
   settings: Settings;
   device: Device;
-  deliveryKey: DeliveryKey;
+  context: Context;
 }
 
 const init = async (
@@ -45,20 +45,17 @@ const init = async (
   const form = new Form(visualization.connection);
   const locale = new Locale(visualization.connection);
   const settings = new Settings(visualization.connection);
-  const deliveryKey = new DeliveryKey(visualization.connection);
   const device = new Device(visualization.connection);
+  const context = new Context(visualization.connection);
 
   await visualization.init();
-
-  const context = await visualization.context();
 
   return {
     form,
     locale,
     settings,
     device,
-    deliveryKey,
-    ...context,
+    context,
   };
 };
 
@@ -73,9 +70,9 @@ export {
   SettingsChangeDispose,
   SettingsChangeHandler,
   SettingsModel,
-  DeliveryKeyChangeDispose,
-  DeliveryKeyChangeHandler,
-  DeliveryKeyModel,
+  ContextChangeDispose,
+  ContextModel,
+  ContextChangeHandler,
   DeviceChangeDispose,
   DeviceChangeHandler,
   DeviceModel,
