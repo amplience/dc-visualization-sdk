@@ -1,9 +1,5 @@
 import { ClientConnection, MC_EVENTS } from 'message-event-channel';
-import {
-  CONNECTION_ERRORS,
-  CONNECTION_EVENTS,
-  Visualization,
-} from '../connection';
+import { CONNECTION_ERRORS, Visualization } from '../connection';
 
 describe('Connection', () => {
   it('Connection smoke screen', () => {
@@ -47,18 +43,5 @@ describe('Connection', () => {
     } catch (err) {
       expect(err).toBe(CONNECTION_ERRORS.CONNECTION_TIMEOUT);
     }
-  });
-
-  it('should call context request with correct key', () => {
-    const vis = Visualization.create();
-    const request = jest.fn();
-
-    vis.connection = ({
-      request,
-    } as never) as ClientConnection;
-
-    vis.context();
-
-    expect(request).toHaveBeenCalledWith(CONNECTION_EVENTS.CONTEXT);
   });
 });

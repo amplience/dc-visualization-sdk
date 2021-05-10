@@ -24,8 +24,7 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "precommit": "lint-staged",
-    "postrelease": "ts-node tools/gh-pages-publish",
-    "posttest": "npm run coverage"
+    "postrelease": "ts-node tools/gh-pages-publish"
   },
   "keywords": [],
   "author": "",
