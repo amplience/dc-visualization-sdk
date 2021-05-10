@@ -29,7 +29,7 @@ import {
   DeviceModel,
 } from './device';
 
-interface DcVisualizationStatic extends Context {
+interface VisualizationSDK extends Context {
   form: Form;
   locale: Locale;
   settings: Settings;
@@ -39,7 +39,7 @@ interface DcVisualizationStatic extends Context {
 
 const init = async (
   options: Partial<ClientConnectionConfig> = {}
-): Promise<DcVisualizationStatic> => {
+): Promise<VisualizationSDK> => {
   const visualization = Visualization.create(options);
 
   const form = new Form(visualization.connection);
@@ -66,7 +66,7 @@ export default { init };
 
 export {
   init,
-  DcVisualizationStatic,
+  VisualizationSDK,
   OnChangeHandler,
   LocaleChangeDispose,
   LocaleModel,
