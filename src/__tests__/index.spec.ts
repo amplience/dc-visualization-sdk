@@ -19,7 +19,7 @@ jest.mock('../connection', () => ({
   },
 }));
 
-import { init } from '../dc-visualization-core';
+import { init } from '../dc-visualization-sdk';
 
 import { Form, FORM_EVENTS } from '../form';
 
