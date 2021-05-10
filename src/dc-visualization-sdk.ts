@@ -29,7 +29,7 @@ import {
   ContextModel,
 } from './context';
 
-interface DcVisualizationStatic {
+interface VisualizationSDK {
   form: Form;
   locale: Locale;
   settings: Settings;
@@ -39,7 +39,7 @@ interface DcVisualizationStatic {
 
 const init = async (
   options: Partial<ClientConnectionConfig> = {}
-): Promise<DcVisualizationStatic> => {
+): Promise<VisualizationSDK> => {
   const visualization = Visualization.create(options);
 
   const form = new Form(visualization.connection);
@@ -63,7 +63,7 @@ export default { init };
 
 export {
   init,
-  DcVisualizationStatic,
+  VisualizationSDK,
   OnChangeHandler,
   LocaleChangeDispose,
   LocaleModel,
