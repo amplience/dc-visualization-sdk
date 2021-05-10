@@ -2,7 +2,7 @@
 
 # dc-visualization-sdk
 
-[![build](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml/badge.svg?branch=main)](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml)
+[![Build Status](https://travis-ci.org/amplience/dc-visualization-sdk.svg?branch=master)](https://travis-ci.org/amplience/dc-visualization-sdk)
 [![npm version](https://badge.fury.io/js/dc-visualization-sdk.svg)](https://badge.fury.io/js/dc-visualization-sdk)
 
 `dc-visualization-sdk` enables real time visualizations that can be used in the Content Form in the Dynamic Content (DC) App.
@@ -211,12 +211,22 @@ const settings = await sdk.settings.get();
 
 ## Context
 
-There is some additional contextual information available on the SDK object these are as follows:
+The [Context class]() allows you to retrieve the current meta data of the selected content item. and watch for changes to this option.
 
-```js
-sdk.contentId; // Content Item Id of the content item being visualized
+### context.get()
 
-sdk.snapshotId; // Snapshot Id of the content item being visualized (note: snapshotId is only available in planning)
+This method will retrieve the current meta data of the selected content item. The method returns a promise that resolves to the Context object
 
-sdk.contentTypeId; // Content Type Id of the content item being visualized
+```typescript
+const context = await sdk.context.get();
+```
+
+### context.changed()
+
+This method is for subscribing to changes to the context object. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.
+
+```typescript
+const unsubscribe = sdk.context.changed((model) => {
+  // handle settings change
+});
 ```
