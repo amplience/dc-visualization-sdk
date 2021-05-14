@@ -5,7 +5,7 @@ describe('Device', () => {
   describe('get', () => {
     it('should call connection with get key and return device model', async () => {
       const on = jest.fn();
-      const request = jest.fn(() => ({width: 200, height: 300}));
+      const request = jest.fn(() => ({ width: 200, height: 300 }));
 
       const connection = ({
         on,
@@ -16,7 +16,7 @@ describe('Device', () => {
       const result = await device.get();
 
       expect(connection.request).toBeCalledWith('visualization-sdk:device:get');
-      expect(result).toEqual({width: 200, height: 300});
+      expect(result).toEqual({ width: 200, height: 300 });
     });
   });
 
@@ -47,15 +47,15 @@ describe('Device', () => {
         )?.size
       ).toEqual(2);
 
-      run({width: 200, height: 300});
+      run({ width: 200, height: 300 });
 
-      expect(handler1).toBeCalledWith({width: 200, height: 300});
-      expect(handler2).toBeCalledWith({width: 200, height: 300});
+      expect(handler1).toBeCalledWith({ width: 200, height: 300 });
+      expect(handler2).toBeCalledWith({ width: 200, height: 300 });
 
-      run({width: 1200, height: 900});
+      run({ width: 1200, height: 900 });
 
-      expect(handler1).toBeCalledWith({width: 1200, height: 900});
-      expect(handler2).toBeCalledWith({width: 1200, height: 900});
+      expect(handler1).toBeCalledWith({ width: 1200, height: 900 });
+      expect(handler2).toBeCalledWith({ width: 1200, height: 900 });
 
       expect(connection.emit).not.toBeCalled();
 
