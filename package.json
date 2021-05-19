@@ -26,6 +26,10 @@
     "precommit": "lint-staged",
     "postrelease": "ts-node tools/gh-pages-publish"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amplience/dc-visualization-sdk.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

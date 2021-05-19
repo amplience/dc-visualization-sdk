@@ -3,7 +3,6 @@
 # dc-visualization-sdk
 
 [![tests](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml/badge.svg?branch=main)](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml)
-
 [![npm version](https://badge.fury.io/js/dc-visualization-sdk.svg)](https://badge.fury.io/js/dc-visualization-sdk)
 
 `dc-visualization-sdk` enables real time visualizations that can be used in the Content Form in the Dynamic Content (DC) App.
