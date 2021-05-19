@@ -1,0 +1,374 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>dc-visualization-sdk</title>
+	<meta name="description" content="Documentation for dc-visualization-sdk">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">dc-visualization-sdk</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>dc-visualization-sdk</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://amplience.com/dynamic-content"><img src="./media/header.png" alt="Amplience Dynamic Content"></a></p>
+				<a href="#dc-visualization-sdk" id="dc-visualization-sdk" style="color: inherit; text-decoration: none;">
+					<h1>dc-visualization-sdk</h1>
+				</a>
+				<p><a href="https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml"><img src="https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml/badge.svg?branch=main" alt="tests"></a>
+				<a href="https://badge.fury.io/js/dc-visualization-sdk"><img src="https://badge.fury.io/js/dc-visualization-sdk.svg" alt="npm version"></a></p>
+				<p><code>dc-visualization-sdk</code> enables real time visualizations that can be used in the Content Form in the Dynamic Content (DC) App.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h1>Installation</h1>
+				</a>
+				<p>Using npm:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install dc-visualization-sdk --save</span>
+</code></pre>
+				<p>Using yarn:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add dc-visualization-sdk</span>
+</code></pre>
+				<p>Using cdn:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/dc-visualization-sdk/dist/dc-visualization-sdk.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h1>Usage</h1>
+				</a>
+				<p>In order to create a connection to DC you first need to initiate the SDK with <code>init()</code> method. Once connected you are given an SDK object you can use to subscribe to change events in the content form <code>&lt;sdk&gt;.form.changed(&lt;callback&gt;)</code>, amongst other things.</p>
+				<p>Examples of this are shown below:</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">init</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;dc-visualization-sdk&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sdk</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">init</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">form</span><span style="color: #000000">.</span><span style="color: #795E26">changed</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// handle form model change</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<p>or</p>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">visSDK</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;dc-visualization-sdk&#039;</span><span style="color: #000000">);</span>
+<span style="color: #001080">visSDK</span><span style="color: #000000">.</span><span style="color: #795E26">init</span><span style="color: #000000">().</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">sdk</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">form</span><span style="color: #000000">.</span><span style="color: #795E26">changed</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// handle form model change</span>
+<span style="color: #000000">  });</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#form" id="form" style="color: inherit; text-decoration: none;">
+					<h2>Form</h2>
+				</a>
+				<p>The Form class allows you to retrieve the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.</p>
+				<blockquote>
+					<p>Note: <strong>These methods will only return content when the form content is valid (e.g. if a required field is missing no content will be returned).</strong> Additionally methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.</p>
+				</blockquote>
+				<p>In addition you can set the same parameters that are available in the Delivery API, see the table below for more information.</p>
+				<br/>
+				<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+					<h3>Options</h3>
+				</a>
+				<p>These options are shared between <code>form.get()</code>, <code>form.change()</code> and <code>form.save()</code>.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>key</th>
+							<th>description</th>
+							<th>value</th>
+							<th>default</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>format</code></td>
+							<td>Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined).</td>
+							<td><code>&#39;inlined&#39;</code>, <code>&#39;linked&#39;</code></td>
+							<td><code>&#39;inlined&#39;</code></td>
+						</tr>
+						<tr>
+							<td><code>depth</code></td>
+							<td>Either return all linked content (all) or just the root content item (root).</td>
+							<td><code>&#39;all&#39;</code>, <code>&#39;root&#39;</code></td>
+							<td><code>&#39;all&#39;</code></td>
+						</tr>
+				</tbody></table>
+				<br />
+				<a href="#formget" id="formget" style="color: inherit; text-decoration: none;">
+					<h3>form.get()</h3>
+				</a>
+				<p>This method will retrieve the current state of the form. By default JSON is returned as a fully hydrated tree, to change this see the table above for a full list of options.</p>
+				<blockquote>
+					<p>Note: this method is only available in the Production Content Form</p>
+				</blockquote>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">options</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">format:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;linked&#039;</span>
+<span style="color: #000000">  </span><span style="color: #001080">depth</span><span style="color: #000000">: </span><span style="color: #A31515">&#039;all&#039;</span>
+<span style="color: #000000">};</span>
+
+<span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">form</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #001080">options</span><span style="color: #000000">).</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">model</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// handle form model</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#formsaved" id="formsaved" style="color: inherit; text-decoration: none;">
+					<h3>form.saved()</h3>
+				</a>
+				<p>This method is for subscribing to the save event in the Content Form while editing. You provide a callback which will execute on every save. The method returns an unsubscribe function that when called will stop any further executions of the callback.</p>
+				<p>By default JSON is returned as a fully hydrated tree, to change this see the table above for a full list of options.</p>
+				<blockquote>
+					<p>Note: this method is only available in the Production Content Form</p>
+				</blockquote>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">form</span><span style="color: #000000">.</span><span style="color: #795E26">saved</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// handle form model</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#formchanged" id="formchanged" style="color: inherit; text-decoration: none;">
+					<h3>form.changed()</h3>
+				</a>
+				<p>This method is for subscribing to changes that happen within the Content Form while editing. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.</p>
+				<p>By default JSON is returned as it would be from the Content Delivery API (CDv2), you can also choose to use the legacy JSON-LD format (CDv1). See the table above for a full list of options..</p>
+				<blockquote>
+					<p>Note: this method is only available in the Production Content Form</p>
+				</blockquote>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">form</span><span style="color: #000000">.</span><span style="color: #795E26">changed</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// handle form model</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#locale" id="locale" style="color: inherit; text-decoration: none;">
+					<h2>Locale</h2>
+				</a>
+				<p>The Locale class allows you to retrieve the currently selected locale in the visualization options and watch for changes to this option.</p>
+				<a href="#localeget" id="localeget" style="color: inherit; text-decoration: none;">
+					<h3>locale.get()</h3>
+				</a>
+				<p>This method will retrieve the current locale selected in the visualization options. The method returns a promise that resolves either to the selected locale string e.g. <code>&#39;en-GB&#39;</code> or <code>null</code> if none are selected.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">value</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">locale</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">value</span><span style="color: #000000">);</span>
+<span style="color: #008000">// &#039;en-GB&#039;</span>
+</code></pre>
+				<a href="#localechanged" id="localechanged" style="color: inherit; text-decoration: none;">
+					<h3>locale.changed()</h3>
+				</a>
+				<p>This method is for subscribing to changes to the selected locale in the visualization options. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">locale</span><span style="color: #000000">.</span><span style="color: #795E26">changed</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// handle locale change</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#device" id="device" style="color: inherit; text-decoration: none;">
+					<h2>Device</h2>
+				</a>
+				<p>The Device class allows you to retrieve the currently selected device in the visualization options and watch for changes to this option.</p>
+				<a href="#deviceget" id="deviceget" style="color: inherit; text-decoration: none;">
+					<h3>device.get()</h3>
+				</a>
+				<p>This method will retrieve the current device selected in the visualization options. The method returns a promise that resolves to the selected device.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">device</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">device</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">();</span>
+</code></pre>
+				<a href="#devicechanged" id="devicechanged" style="color: inherit; text-decoration: none;">
+					<h3>device.changed()</h3>
+				</a>
+				<p>This method is for subscribing to changes to the selected device in the visualization options. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">device</span><span style="color: #000000">.</span><span style="color: #795E26">changed</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// handle settings change</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#settings" id="settings" style="color: inherit; text-decoration: none;">
+					<h2>Settings</h2>
+				</a>
+				<p>The Settings class allows you to retrieve your DC visualization settings.</p>
+				<a href="#settingsget" id="settingsget" style="color: inherit; text-decoration: none;">
+					<h3>settings.get()</h3>
+				</a>
+				<p>This method will retrieve the current visualization settings for the hub that the content item being visualized is in. The method returns a promise that resolves to a settings object.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">settings</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">settings</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">();</span>
+</code></pre>
+				<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;vse&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;&lt;vse url&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;devices&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Desktop&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;width&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1024</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;height&quot;</span><span style="color: #000000">: </span><span style="color: #098658">768</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;orientate&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Tablet&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;width&quot;</span><span style="color: #000000">: </span><span style="color: #098658">640</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;height&quot;</span><span style="color: #000000">: </span><span style="color: #098658">768</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;orientate&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Mobile&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;width&quot;</span><span style="color: #000000">: </span><span style="color: #098658">320</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;height&quot;</span><span style="color: #000000">: </span><span style="color: #098658">512</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;orientate&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;name&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;Desktop Large&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;width&quot;</span><span style="color: #000000">: </span><span style="color: #098658">1440</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;height&quot;</span><span style="color: #000000">: </span><span style="color: #098658">900</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #0451A5">&quot;orientate&quot;</span><span style="color: #000000">: </span><span style="color: #0000FF">true</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#context" id="context" style="color: inherit; text-decoration: none;">
+					<h2>Context</h2>
+				</a>
+				<p>The Context class allows you to retrieve the current meta data of the selected content item. and watch for changes to this option.</p>
+				<a href="#contextget" id="contextget" style="color: inherit; text-decoration: none;">
+					<h3>context.get()</h3>
+				</a>
+				<p>This method will retrieve the current meta data of the selected content item. The method returns a promise that resolves to the Context object</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">context</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">();</span>
+</code></pre>
+				<a href="#contextchanged" id="contextchanged" style="color: inherit; text-decoration: none;">
+					<h3>context.changed()</h3>
+				</a>
+				<p>This method is for subscribing to changes to the context object. You provide a callback which will execute on every change. The method returns an unsubscribe function that when called will stop any further executions of the callback.</p>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">unsubscribe</span><span style="color: #000000"> = </span><span style="color: #001080">sdk</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">.</span><span style="color: #795E26">changed</span><span style="color: #000000">((</span><span style="color: #001080">model</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// handle settings change</span>
+<span style="color: #000000">});</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/cdv1response.html" class="tsd-kind-icon">CDv1<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/cdv2linkedresponse.html" class="tsd-kind-icon">CDv2<wbr>Linked<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/cdv2response.html" class="tsd-kind-icon">CDv2<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/idevice.html" class="tsd-kind-icon">IDevice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/isettings.html" class="tsd-kind-icon">ISettings</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/onchangehandler.html" class="tsd-kind-icon">On<wbr>Change<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/visualizationsdk.html" class="tsd-kind-icon">VisualizationSDK</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#contextchangedispose" class="tsd-kind-icon">Context<wbr>Change<wbr>Dispose</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#contextchangehandler" class="tsd-kind-icon">Context<wbr>Change<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#contextmodel" class="tsd-kind-icon">Context<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#devicechangedispose" class="tsd-kind-icon">Device<wbr>Change<wbr>Dispose</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#devicechangehandler" class="tsd-kind-icon">Device<wbr>Change<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#devicemodel" class="tsd-kind-icon">Device<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#imodel" class="tsd-kind-icon">IModel</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#localechangedispose" class="tsd-kind-icon">Locale<wbr>Change<wbr>Dispose</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#localemodel" class="tsd-kind-icon">Locale<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#modelchangedispose" class="tsd-kind-icon">Model<wbr>Change<wbr>Dispose</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#modelchangehandler" class="tsd-kind-icon">Model<wbr>Change<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#settingschangedispose" class="tsd-kind-icon">Settings<wbr>Change<wbr>Dispose</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#settingschangehandler" class="tsd-kind-icon">Settings<wbr>Change<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#settingsmodel" class="tsd-kind-icon">Settings<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-property">
+						<a href="modules.html#default" class="tsd-kind-icon">default</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#init" class="tsd-kind-icon">init</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
