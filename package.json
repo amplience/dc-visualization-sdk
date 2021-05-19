@@ -23,8 +23,7 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
-    "precommit": "lint-staged",
-    "postrelease": "ts-node tools/gh-pages-publish"
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
