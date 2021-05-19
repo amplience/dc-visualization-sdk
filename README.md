@@ -29,7 +29,7 @@ Using cdn:
 
 # Usage
 
-In order to create a connection to DC you first need to initiate the SDK with `init()` method. Once connected you are given an [SDK object]() you can use to subscribe to change events in the content form `<sdk>.form.changed(<callback>)`, amongst other things.
+In order to create a connection to DC you first need to initiate the SDK with `init()` method. Once connected you are given an SDK object you can use to subscribe to change events in the content form `<sdk>.form.changed(<callback>)`, amongst other things.
 
 Examples of this are shown below:
 
@@ -54,7 +54,7 @@ visSDK.init().then((sdk) => {
 
 ## Form
 
-The [Form class]() allows you to retrieve the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
+The Form class allows you to retrieve the current state of the Content Form as well as subscribe to changes that take place while editing. This lets you create real time visualizations that are not dependent on the content item being saved.
 
 > Note: **These methods will only return content when the form content is valid (e.g. if a required field is missing no content will be returned).** Additionally methods are not available when the form is not visible, such as the Snapshot Browser or Edition contexts.
 
@@ -120,7 +120,7 @@ const unsubscribe = sdk.form.changed((model) => {
 
 ## Locale
 
-The [Locale class]() allows you to retrieve the currently selected locale in the visualization options and watch for changes to this option.
+The Locale class allows you to retrieve the currently selected locale in the visualization options and watch for changes to this option.
 
 ### locale.get()
 
@@ -145,7 +145,7 @@ const unsubscribe = sdk.locale.changed((model) => {
 
 ## Device
 
-The [Device class]() allows you to retrieve the currently selected device in the visualization options and watch for changes to this option.
+The Device class allows you to retrieve the currently selected device in the visualization options and watch for changes to this option.
 
 ### device.get()
 
@@ -167,7 +167,7 @@ const unsubscribe = sdk.device.changed((model) => {
 
 ## Settings
 
-The [Settings class]() allows you to retrieve your DC visualization settings.
+The Settings class allows you to retrieve your DC visualization settings.
 
 ### settings.get()
 
@@ -211,7 +211,7 @@ const settings = await sdk.settings.get();
 
 ## Context
 
-The [Context class]() allows you to retrieve the current meta data of the selected content item. and watch for changes to this option.
+The Context class allows you to retrieve the current meta data of the selected content item. and watch for changes to this option.
 
 ### context.get()
 
