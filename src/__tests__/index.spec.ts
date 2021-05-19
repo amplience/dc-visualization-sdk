@@ -27,7 +27,8 @@ import { Locale, LOCALE_EVENTS } from '../locale';
 
 import { Settings, SETTINGS_EVENTS } from '../settings';
 
-import { DeliveryKey, DELIVERY_KEY_EVENTS } from '../delivery-key';
+import { Context, CONTEXT_EVENTS } from '../context';
+import { CONNECTION_ERRORS } from '../connection';
 
 describe('core smoke test', () => {
   beforeEach(() => {
@@ -46,7 +47,7 @@ describe('core smoke test', () => {
 
       expect(sdk.form).toBeInstanceOf(Form);
       expect(sdk.settings).toBeInstanceOf(Settings);
-      expect(sdk.deliveryKey).toBeInstanceOf(DeliveryKey);
+      expect(sdk.context).toBeInstanceOf(Context);
       expect(sdk.locale).toBeInstanceOf(Locale);
     });
 
@@ -60,7 +61,7 @@ describe('core smoke test', () => {
       expect(FORM_EVENTS).toBeTruthy();
       expect(LOCALE_EVENTS).toBeTruthy();
       expect(SETTINGS_EVENTS).toBeTruthy();
-      expect(DELIVERY_KEY_EVENTS).toBeTruthy();
+      expect(CONTEXT_EVENTS).toBeTruthy();
     });
   });
 });

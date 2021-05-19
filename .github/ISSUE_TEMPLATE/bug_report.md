@@ -1,3 +1,11 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: 'bug'
+assignees: 'dev-warner'
+---
+
 <!--
 If you are asking a question rather than filing a bug, try one of these instead:
 - Ask a question on StackOverflow using the tag amplience-dynamic-content
