@@ -24,7 +24,7 @@ yarn add dc-visualization-sdk
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/dc-visualization-sdk/dist/dc-visualization-sdk.umd.js"></script>
+<script src="https://unpkg.com/dc-visualization-sdk/dist/lib/dc-visualization-sdk.umd.js"></script>
 ```
 
 # Usage
