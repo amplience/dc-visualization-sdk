@@ -66,10 +66,11 @@ In addition you can set the same parameters that are available in the Delivery A
 
 These options are shared between `form.get()`, `form.change()` and `form.save()`.
 
-| key      | description                                                                                            | value                   | default     |
-| -------- | ------------------------------------------------------------------------------------------------------ | ----------------------- | ----------- |
-| `format` | Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined). | `'inlined'`, `'linked'` | `'inlined'` |
-| `depth`  | Either return all linked content (all) or just the root content item (root).                           | `'all'`, `'root'`       | `'all'`     |
+| key            | description                                                                                               | value                   | default     |
+| -------------- | --------------------------------------------------------------------------------------------------------- | ----------------------- | ----------- |
+| `format`       | Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined).    | `'inlined'`, `'linked'` | `'inlined'` |
+| `depth`        | Either return all linked content (all) or just the root content item (root).                              | `'all'`, `'root'`       | `'all'`     |
+| `allowInvalid` | Weather or not to allow invalid content to be returned on change. i.e minItems requirements being ignored | `true, false`           | `false`     |
 
 <br />
 
