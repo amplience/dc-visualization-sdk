@@ -70,7 +70,7 @@ These options are shared between `form.get()`, `form.change()` and `form.save()`
 | -------------- | --------------------------------------------------------------------------------------------------------- | ----------------------- | ----------- |
 | `format`       | Either return child content in the tree as a link (linked) or have the data hydrated inline (inlined).    | `'inlined'`, `'linked'` | `'inlined'` |
 | `depth`        | Either return all linked content (all) or just the root content item (root).                              | `'all'`, `'root'`       | `'all'`     |
-| `allowInvalid` | Whether or not to allow invalid content to be returned on change. i.e minItems requirements being ignored | `true, false`           | `false`     |
+| `allowInvalid` | Whether or not to allow invalid content to be returned on change. e.g minItems requirements being ignored | `true, false`           | `false`     |
 
 <br />
 

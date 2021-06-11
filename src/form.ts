@@ -72,7 +72,7 @@ export class Form {
   /**
    * Get the current model state of all the fields in the form in Delivery Format.
    *
-   * @param config - Config for how the model should be returned i.e CDv2 or CDv1
+   * @param config - Config for how the model should be returned e.g CDv2 or CDv1
    *
    * ### Example
    * ```typescript
@@ -96,7 +96,7 @@ export class Form {
    * Sets up a listener for when the form saves
    *
    * @param cb - callback function to be called when form has saved
-   * @param config - Config for how the model should be returned i.e CDv2 or CDv1
+   * @param config - Config for how the model should be returned e.g CDv2 or CDv1
    *
    * @returns a dispose function which removes the listener
    *
@@ -121,7 +121,7 @@ export class Form {
    * Sets up a listener for when the form changes
    *
    * @param cb - callback function to be called when form has changed
-   * @param config - Config for how the model should be returned i.e CDv2 or CDv1
+   * @param config - Config for how the model should be returned e.g CDv2 or CDv1
    *
    * @returns a dispose function which removes the listener
    *
