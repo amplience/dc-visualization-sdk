@@ -1,6 +1,8 @@
 import { ClientConnection } from 'message-event-channel';
 import { Form } from '../form';
 
+import hash from 'object-hash';
+
 describe('Form', () => {
   describe('get', () => {
     it('should call connection with get key and config passed', async () => {
@@ -18,6 +20,7 @@ describe('Form', () => {
       expect(connection.request).toBeCalledWith('visualization-sdk:form:get', {
         depth: 'root',
         format: 'inlined',
+        allowInvalid: false,
       });
       expect(result).toEqual({ hello: 'world' });
     });
@@ -37,6 +40,7 @@ describe('Form', () => {
       expect(connection.request).toBeCalledWith('visualization-sdk:form:get', {
         depth: 'all',
         format: 'inlined',
+        allowInvalid: false,
       });
       expect(result).toEqual({ hello: 'world' });
     });
@@ -65,17 +69,21 @@ describe('Form', () => {
         depth: 'root',
       });
 
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(1);
+      const key1 = hash({
+        depth: 'all',
+        format: 'inlined',
+        allowInvalid: false,
+      });
 
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          'fa34dcff1b03880fa5c6f454423e2f839ee0885a'
-        )?.size
-      ).toBe(1);
+      const key2 = hash({
+        depth: 'root',
+        format: 'linked',
+        allowInvalid: false,
+      });
+
+      expect(form.savedHandlerContainer.changeHandlers.get(key1)?.size).toBe(1);
+
+      expect(form.savedHandlerContainer.changeHandlers.get(key2)?.size).toBe(1);
 
       // tslint:disable-next-line
       const dispose2 = form.saved((model) => {});
@@ -84,33 +92,26 @@ describe('Form', () => {
         config: {
           format: 'inlined',
           depth: 'all',
+          allowInvalid: false,
         },
-        id: '1b0ea33d365f8719b11762ad0ab45f80357ce200',
+        id: key1,
       });
 
       expect(emit).toHaveBeenCalledTimes(2);
 
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(2);
+      expect(form.savedHandlerContainer.changeHandlers.get(key1)?.size).toBe(2);
 
       dispose1();
 
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(1);
+      expect(form.savedHandlerContainer.changeHandlers.get(key1)?.size).toBe(1);
 
       dispose2();
 
-      expect(
-        form.savedHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(0);
+      expect(form.savedHandlerContainer.changeHandlers.get(key1)?.size).toBe(0);
+
+      dispose3();
+
+      expect(form.savedHandlerContainer.changeHandlers.get(key2)?.size).toBe(0);
     });
 
     it('should only call handlers with correct config', () => {
@@ -133,7 +134,13 @@ describe('Form', () => {
       const dispose1 = form.saved(handler1);
       const dispose2 = form.saved(handler2);
 
-      run({ handlerId: '1b0ea33d365f8719b11762ad0ab45f80357ce200', model: {} });
+      const key1 = hash({
+        depth: 'all',
+        format: 'inlined',
+        allowInvalid: false,
+      });
+
+      run({ handlerId: key1, model: {} });
 
       expect(handler1).toBeCalledTimes(1);
       expect(handler2).toBeCalledTimes(1);
@@ -158,11 +165,15 @@ describe('Form', () => {
       // tslint:disable-next-line
       const dispose1 = form.changed((model) => {});
 
-      expect(
-        form.changeHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(1);
+      const key1 = hash({
+        depth: 'all',
+        format: 'inlined',
+        allowInvalid: false,
+      });
+
+      expect(form.changeHandlerContainer.changeHandlers.get(key1)?.size).toBe(
+        1
+      );
 
       // tslint:disable-next-line
       const dispose2 = form.changed((model) => {});
@@ -173,34 +184,29 @@ describe('Form', () => {
           config: {
             format: 'inlined',
             depth: 'all',
+            allowInvalid: false,
           },
-          id: '1b0ea33d365f8719b11762ad0ab45f80357ce200',
+          id: key1,
         }
       );
 
       expect(emit).toHaveBeenCalledTimes(1);
 
-      expect(
-        form.changeHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(2);
+      expect(form.changeHandlerContainer.changeHandlers.get(key1)?.size).toBe(
+        2
+      );
 
       dispose1();
 
-      expect(
-        form.changeHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(1);
+      expect(form.changeHandlerContainer.changeHandlers.get(key1)?.size).toBe(
+        1
+      );
 
       dispose2();
 
-      expect(
-        form.changeHandlerContainer.changeHandlers.get(
-          '1b0ea33d365f8719b11762ad0ab45f80357ce200'
-        )?.size
-      ).toBe(0);
+      expect(form.changeHandlerContainer.changeHandlers.get(key1)?.size).toBe(
+        0
+      );
     });
 
     it('should only call handlers with correct config', () => {
@@ -225,7 +231,13 @@ describe('Form', () => {
       const dispose1 = form.changed(handler1);
       const dispose2 = form.changed(handler2);
 
-      run({ handlerId: '1b0ea33d365f8719b11762ad0ab45f80357ce200', model: {} });
+      const key1 = hash({
+        depth: 'all',
+        format: 'inlined',
+        allowInvalid: false,
+      });
+
+      run({ handlerId: key1, model: {} });
 
       expect(handler1).toBeCalledTimes(1);
       expect(handler2).toBeCalledTimes(1);
