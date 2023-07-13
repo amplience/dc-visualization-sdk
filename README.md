@@ -1,5 +1,3 @@
-[![Amplience Dynamic Content](./media/header.png)](https://amplience.com/dynamic-content)
-
 # dc-visualization-sdk
 
 [![tests](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml/badge.svg?branch=main)](https://github.com/amplience/dc-visualization-sdk/actions/workflows/app.yml)
